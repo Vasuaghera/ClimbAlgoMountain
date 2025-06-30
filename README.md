@@ -49,8 +49,6 @@ ClimbAlgoMountain transforms DSA learning into an adventure. Play interactive ga
 - **Score Tracking:** Earn points for each level and game completed.
 - **Achievements & Badges:** Collect badges for milestones, streaks, and high scores.
 
-> **Note:** The current system does not include animated transitions or a reusable sidebar/menu for level navigation. Level unlocking and advanced gamification features are planned for future updates.
-
 ### 📈 Progress Tracking & Analytics
 - **Personal Dashboard:** View your overall progress, scores, and completed topics.
 - **Detailed Analytics:** Track your learning journey, level completion, and time spent.
