@@ -93,6 +93,8 @@ const TreeGame = () => {
   const [hasPremium, setHasPremium] = useState(false);
   const [loadingPremium, setLoadingPremium] = useState(true);
   const [razorpayLoading, setRazorpayLoading] = useState(false);
+  
+  const [completedLevels, setCompletedLevels] = useState(new Set());
 
   useEffect(() => {
     const checkPremium = async () => {
@@ -576,7 +578,6 @@ const TreeGame = () => {
   // Add new state variables after other useState declarations
   const [levelStartTime, setLevelStartTime] = useState(Date.now());
   const [currentScore, setCurrentScore] = useState(0);
-  const [completedLevels, setCompletedLevels] = useState(new Set());
   const [isSaving, setIsSaving] = useState(false);
 
   // Fetch initial progress when component mounts
