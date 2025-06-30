@@ -1403,6 +1403,12 @@ const ChainMastersAdventure = () => {
         }
     }, [user, authLoading, loadProgress]);
 
+    useEffect(() => {
+        if (user) {
+            loadProgress();
+        }
+    }, [currentLevel, user, loadProgress]);
+
 
     // Main render condition: Show loading if auth is still loading
     if (authLoading) {
@@ -3378,12 +3384,6 @@ const ChainMastersAdventure = () => {
             </div>
         );
     };
-
-    useEffect(() => {
-        if (user) {
-            loadProgress();
-        }
-    }, [currentLevel, user, loadProgress]);
 
     console.log('Rendering navigation, completedLevels:', completedLevels, 'linkedListGameProgress:', linkedListGameProgress);
 
