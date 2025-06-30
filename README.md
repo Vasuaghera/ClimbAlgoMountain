@@ -104,27 +104,46 @@ Each DSA topic is a unique, interactive game with multiple levels:
 ---
 
 ## Level Progression System
-- **Sequential Unlocking:** Complete each level to unlock the next.
-- **Sidebar Menu:** Toggleable menu shows all levels, with visual indicators for completed, current, unlocked, and locked levels.
+- **Sidebar Menu:** Shows all levels and it show completed and incompleted levels.
 - **Animated Progress:** Smooth transitions, pulsing effects, and progress bars.
-- **Reusable Component:** Consistent UX across all games.
 - **Progress Saved:** All progress is saved to your profile and can be resumed anytime.
 
 ---
 
 ## Tech Stack
+
 **Frontend:**
-- React 18, React Router, Styled Components, Framer Motion
-- DnD Kit, React D3 Tree, Axios
-- Tailwind CSS (for styling)
+- **React 18** (core UI library)
+- **React Router DOM** (routing)
+- **Styled Components** (CSS-in-JS styling)
+- **Framer Motion** (animations)
+- **DnD Kit** (`@dnd-kit/core`, `@dnd-kit/sortable`) (drag-and-drop)
+- **React D3 Tree** (tree visualizations)
+- **React DnD** and **React DnD HTML5 Backend** (additional drag-and-drop support)
+- **Axios** (HTTP requests)
+- **Tailwind CSS** (utility-first CSS framework)
+- **Jest** and **React Testing Library** (`@testing-library/react`, `@testing-library/jest-dom`, `@testing-library/user-event`) (testing)
+- **Web Vitals** (performance monitoring)
+- **React Scripts** (build and development scripts)
 
 **Backend:**
-- Node.js, Express.js
-- MongoDB (Mongoose)
-- JWT Authentication
-- Cloudinary (for media)
-- Razorpay (for payments)
-- Nodemailer (for email/OTP)
+- **Node.js** (runtime)
+- **Express.js** (web framework)
+- **MongoDB** with **Mongoose** (database and ODM)
+- **JWT (jsonwebtoken)** (authentication)
+- **BcryptJS** (password hashing)
+- **Cloudinary** (media/image storage)
+- **Razorpay** (payment gateway)
+- **Nodemailer** (email/OTP)
+- **CORS** (cross-origin resource sharing)
+- **Dotenv** (environment variables)
+- **Helmet** (security headers)
+- **Express Rate Limit** (rate limiting)
+- **Express Validator** (input validation)
+- **Multer** and **Multer Storage Cloudinary** (file uploads)
+- **Node Fetch** (server-side HTTP requests)
+- **Morgan** (logging)
+- **Nodemon** (development auto-reload, dev dependency)
 
 ---
 
