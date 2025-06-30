@@ -264,8 +264,8 @@ Each DSA topic is a unique, interactive game with multiple levels:
 ## Getting Started
 1. **Clone the repository:**
    ```bash
-   git clone <your-repo-url>
-   cd <project-root>
+   git clone (https://github.com/Vasuaghera/ClimbAlgoMountain)
+   cd https://github.com/Vasuaghera/ClimbAlgoMountain)
    ```
 2. **Install backend dependencies:**
    ```bash
