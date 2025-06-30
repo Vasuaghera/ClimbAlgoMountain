@@ -1,16 +1,18 @@
-# DSA Game Project
-<!-- Real chhe -->
-This project consists of two main parts:
+# ClimbAlgoMountain
 
-## Server (Backend)
-Located in the `server` directory, this contains the backend code and API endpoints.
+ClimbAlgoMountain is a gamified platform to master Data Structures and Algorithms (DSA) through interactive games, visualizations, and community support. Track your progress, join forums, and unlock rewards—perfect for students, children, and anyone making DSA learning fun and accessible!
 
-## Client (Frontend)
-Located in the `client` directory, this contains the frontend code and user interface.
+---
 
-## Games
-1. Treasure Chest Adventure - Array-based learning game
-2. Word Wizard's Quest - String manipulation learning game
+## Features
+- **Interactive DSA Games:** Learn and practice DSA concepts through engaging mini-games and challenges.
+- **Visualizations:** Intuitive visual tools to help you understand algorithms and data structures.
+- **Progress Tracking:** Monitor your learning journey and climb the leaderboard.
+- **Community Forum:** Ask questions, share knowledge, and collaborate with others.
+- **Rewards & Achievements:** Unlock badges and rewards as you progress.
+- **Child-Friendly:** Designed to be accessible and helpful for young learners.
+
+---
 
 ## Project Structure
 ```
@@ -19,6 +21,8 @@ Located in the `client` directory, this contains the frontend code and user inte
 ├── client/         # Frontend code
 └── README.md       # Project documentation
 ```
+
+---
 
 ## Getting Started
 1. Navigate to the server directory and install dependencies:
