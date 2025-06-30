@@ -1337,6 +1337,73 @@ const ChainMastersAdventure = () => {
         setShowHint(prev => !prev);
     }, []);
 
+        // Main useEffect for level initialization
+    useEffect(() => {
+        console.log('Level changed to:', currentLevel);
+        switch (currentLevel) {
+            case 1:
+            initializeLevel1();
+                break;
+            case 2:
+            initializeLevel2();
+                break;
+            case 3:
+                initializeLevel3();
+                break;
+            case 4:
+                initializeLevel4();
+                break;
+            case 5:
+                initializeLevel5();
+                break;
+            case 6:
+                initializeLevel6();
+                break;
+            case 7:
+                initializeLevel7();
+                break;
+            case 8:
+                initializeLevel8();
+                break;
+            case 9:
+                initializeLevel9();
+                break;
+            case 10:
+                initializeLevel10();
+                break;
+            default:
+                console.log('Unknown level:', currentLevel);
+        }
+    }, [currentLevel, 
+        initializeLevel1, 
+        initializeLevel2, 
+        initializeLevel3, 
+        initializeLevel4, 
+        initializeLevel5, 
+        initializeLevel6, 
+        initializeLevel7, 
+        initializeLevel8, 
+        initializeLevel9, 
+        initializeLevel10
+    ]);
+
+    // Effect to check if current level is completed from loaded progress
+    useEffect(() => {
+        console.log('Checking completion for level:', currentLevel, 'Completed levels set:', completedLevels);
+        if (completedLevels.has(currentLevel)) {
+            console.log(`Level ${currentLevel} is already completed.`);
+            setLevelObjectiveMet(true);
+        }
+    }, [currentLevel, completedLevels]);
+
+    // Authentication and Progress Fetching (Initial Load)
+    useEffect(() => {
+        if (!authLoading && user) {
+            loadProgress();
+        }
+    }, [user, authLoading, loadProgress]);
+
+
     // Main render condition: Show loading if auth is still loading
     if (authLoading) {
         return (
@@ -1453,72 +1520,6 @@ const ChainMastersAdventure = () => {
         setLevelObjectiveMet(true);
         setGameMessage(`Level ${level} completed! Great job!`);
     };
-
-    // Main useEffect for level initialization
-    useEffect(() => {
-        console.log('Level changed to:', currentLevel);
-        switch (currentLevel) {
-            case 1:
-            initializeLevel1();
-                break;
-            case 2:
-            initializeLevel2();
-                break;
-            case 3:
-                initializeLevel3();
-                break;
-            case 4:
-                initializeLevel4();
-                break;
-            case 5:
-                initializeLevel5();
-                break;
-            case 6:
-                initializeLevel6();
-                break;
-            case 7:
-                initializeLevel7();
-                break;
-            case 8:
-                initializeLevel8();
-                break;
-            case 9:
-                initializeLevel9();
-                break;
-            case 10:
-                initializeLevel10();
-                break;
-            default:
-                console.log('Unknown level:', currentLevel);
-        }
-    }, [currentLevel, 
-        initializeLevel1, 
-        initializeLevel2, 
-        initializeLevel3, 
-        initializeLevel4, 
-        initializeLevel5, 
-        initializeLevel6, 
-        initializeLevel7, 
-        initializeLevel8, 
-        initializeLevel9, 
-        initializeLevel10
-    ]);
-
-    // Effect to check if current level is completed from loaded progress
-    useEffect(() => {
-        console.log('Checking completion for level:', currentLevel, 'Completed levels set:', completedLevels);
-        if (completedLevels.has(currentLevel)) {
-            console.log(`Level ${currentLevel} is already completed.`);
-            setLevelObjectiveMet(true);
-        }
-    }, [currentLevel, completedLevels]);
-
-    // Authentication and Progress Fetching (Initial Load)
-    useEffect(() => {
-        if (!authLoading && user) {
-            loadProgress();
-        }
-    }, [user, authLoading, loadProgress]);
 
     // Main render condition: Show loading if auth is still loading, or user is not available
     if (authLoading) {
@@ -3309,17 +3310,6 @@ const ChainMastersAdventure = () => {
         if (isLevelUnlocked(levelNum)) {
             setCurrentLevel(levelNum);
         }
-    };
-
-    // New function to render levels menu
-    const renderLevelsMenu = () => {
-        return (
-            <LevelsMenu
-                levels={Array.from({ length: 10 }, (_, i) => i + 1)}
-                completedLevels={completedLevels}
-                onLevelSelect={handleLevelSelect}
-            />
-        );
     };
 
     // Navigation Bar (for all levels)
