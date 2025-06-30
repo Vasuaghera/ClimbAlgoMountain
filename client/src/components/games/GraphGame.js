@@ -22,7 +22,11 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const GraphGame = () => {
   const { user } = useAuth();
-  // const [user, setUser] = useState(null);
+  const [useres, setUser] = useState(null);
+  let currentStroke = "#1f77b4";
+  let currentStrokeWidth = "2";
+  let isHighlighted = false;
+  let edge = null;
   // Define level data
   const levelData = {
     1: {
@@ -514,7 +518,6 @@ const GraphGame = () => {
       completionMessage: "Excellent! You've learned about both Prim's and Kruskal's algorithms for finding Minimum Spanning Trees!"
     }
   };
-
   const [currentLevel, setCurrentLevel] = useState(1);
   const [selectedConcept, setSelectedConcept] = useState(null);
   const [nodes, setNodes] = useState([]);
@@ -4116,10 +4119,6 @@ const GraphGame = () => {
                     
                     if (!sourceNode || !targetNode) return null;
 
-                    let currentStroke = "#1f77b4";
-                    let currentStrokeWidth = "2";
-                    let isHighlighted = false;
-                    // let edge = null;
 
                     if (currentLevel === 1 && selectedConcept === 'edges') {
                       currentStroke = "#dc2626"; // Red color
