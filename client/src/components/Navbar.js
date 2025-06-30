@@ -42,7 +42,7 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { to: '/', label: 'Home', always: true },
+    { to: '/', label: 'Home', auth: true },
     { to: '/games', label: 'Games', auth: true },
     { to: '/leaderboard', label: 'Leaderboard', auth: true },
     { to: '/rewards', label: 'Rewards', auth: true },
