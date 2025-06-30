@@ -1,42 +1,309 @@
-# ClimbAlgoMountain
+# ClimbAlgoMountain (DSA Game)
 
-ClimbAlgoMountain is a gamified platform to master Data Structures and Algorithms (DSA) through interactive games, visualizations, and community support. Track your progress, join forums, and unlock rewards—perfect for students, children, and anyone making DSA learning fun and accessible!
+A gamified platform to master Data Structures and Algorithms (DSA) through interactive games, visualizations, and community support. Track your progress, join forums, and unlock rewards—perfect for students, children, and anyone making DSA learning fun and accessible!
+
+---
+
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Game Modules](#game-modules)
+- [Level Progression System](#level-progression-system)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Authentication & Premium](#authentication--premium)
+- [Community & Social Features](#community--social-features)
+- [Rewards & Achievements](#rewards--achievements)
+- [Contribution Guidelines](#contribution-guidelines)
+- [License](#license)
+- [Contact](#contact)
+
+---
+
+## Overview
+ClimbAlgoMountain transforms DSA learning into an adventure. Play interactive games for each DSA topic, visualize algorithms, track your journey, and connect with a supportive community. Designed for all ages, especially students and beginners.
 
 ---
 
 ## Features
-- **Interactive DSA Games:** Learn and practice DSA concepts through engaging mini-games and challenges.
-- **Visualizations:** Intuitive visual tools to help you understand algorithms and data structures.
-- **Progress Tracking:** Monitor your learning journey and climb the leaderboard.
-- **Community Forum:** Ask questions, share knowledge, and collaborate with others.
-- **Rewards & Achievements:** Unlock badges and rewards as you progress.
-- **Child-Friendly:** Designed to be accessible and helpful for young learners.
+
+### 🎮 Interactive DSA Games
+- **Arrays:** Solve puzzles, collect gems, and master array operations.
+- **Linked Lists:** Build, traverse, and manipulate chains in creative scenarios.
+- **Stacks & Queues:** Play with stacking, queuing, bracket matching, postfix evaluation, and more.
+- **Sorting Algorithms:** Sort toys, books, and more using Bubble, Selection, Insertion, Merge, Quick, Heap, Counting, and Radix sorts.
+- **Heap & Priority Queue:** Build heaps, repair trees, manage hospital queues, and compare heap types.
+- **Bit Manipulation:** Toggle bits, perform AND/OR/XOR/NOT, solve bit puzzles, and pattern matching.
+- **Sliding Window & Two Pointer:** Solve classic sliding window and two-pointer problems interactively.
+- **Recursion:** Explore recursion with nesting dolls, factorials, Fibonacci, Tower of Hanoi, permutations, mazes, fractals, palindromes, and N-Queens.
+- **Trees (Premium):** Visualize and build binary trees, perform traversals, and solve tree-based puzzles.
+- **Graphs (Premium):** Learn graph concepts, traversals (BFS/DFS), shortest paths, cycles, and more with visual tools.
+- **Dynamic Programming:** (Coming Soon) Solve optimization puzzles and master DP techniques.
+- **Word Games:** (e.g., Word Wizard Quest) for string and pattern practice.
+
+### 🏆 Level Progression & Gamification
+- **Sequential Level Unlocking:** Complete each level to unlock the next, ensuring structured learning.
+- **Sidebar Level Menu:** Toggleable menu with visual indicators for completed, current, unlocked, and locked levels.
+- **Animated Progress:** Smooth transitions, pulsing effects, and progress bars.
+- **Score Tracking:** Earn points for each level and game completed.
+- **Achievements & Badges:** Collect badges for milestones, streaks, and high scores.
+
+### 📈 Progress Tracking & Analytics
+- **Personal Dashboard:** View your overall progress, scores, and completed topics.
+- **Detailed Analytics:** Track your learning journey, level completion, and time spent.
+- **Leaderboard:** See top performers and your global rank.
+
+### 👥 Community & Social Features
+- **Forum:** Ask questions, answer others, and discuss DSA topics.
+- **Friends System:** Add friends, view their progress, and compete.
+- **Chatbot:** Get instant help, hints, and DSA explanations.
+
+### 💎 Rewards & Premium
+- **Rewards System:** Earn points and redeem them for real or virtual rewards (badges, kits, etc.).
+- **Premium Games:** Unlock advanced games (Tree, Graph, Bundle) via secure payment (Razorpay).
+- **Premium-Only Content:** Access exclusive levels, visualizations, and advanced challenges.
+
+### 🔒 Authentication & Security
+- **User Accounts:** Register, login, and manage your profile.
+- **Password Recovery:** Secure OTP-based password reset.
+- **Access Control:** Premium content is protected and only available to users with access.
+
+### 🧩 Visualizations & Learning Tools
+- **Algorithm Visualizers:** (Planned/Partial) Visualize sorting, trees, graphs, and more.
+- **Step-by-Step Guidance:** Hints, tooltips, and explanations for each level and concept.
+
+### 🧒 Child-Friendly & Accessible
+- **Kid-Friendly Design:** Colorful, engaging, and easy-to-use interface.
+- **Accessible Language:** Explanations and instructions suitable for all ages.
+
+### 🛠️ Developer & Contributor Features
+- **Modular Codebase:** Easy to add new games, levels, and features.
+- **API-Driven:** Clean separation of frontend and backend for scalability.
+- **Extensive Documentation:** Level progression, project structure, and contribution guidelines.
+
+---
+
+## Game Modules
+Each DSA topic is a unique, interactive game with multiple levels:
+
+- **Arrays:** Treasure Chest Adventure – Collect gems, solve puzzles, and master array operations.
+- **Linked Lists:** Chain Masters Adventure – Build, traverse, and manipulate chains in creative scenarios.
+- **Stacks & Queues:** Stack & Queue Master – Solve stacking and queuing challenges, bracket matching, postfix evaluation, and more.
+- **Sorting Algorithms:** Sorting Master – Sort toys, books, and more using Bubble, Selection, Insertion, Merge, Quick, Heap, Counting, and Radix sorts.
+- **Heap & Priority Queue:** Heap Priority Queue Master – Build heaps, repair trees, manage hospital queues, and compare heap types.
+- **Bit Manipulation:** Bit Manipulation Master – Toggle bits, perform AND/OR/XOR/NOT, solve bit puzzles.
+- **Sliding Window & Two Pointer:** Window Pointer Master – Solve classic sliding window and two-pointer problems interactively.
+- **Recursion:** Recursion Realm – Explore recursion with nesting dolls, factorials, Fibonacci, Tower of Hanoi, permutations, mazes, fractals, palindromes, and N-Queens.
+- **Trees (Premium):** Tree Game – Visualize and build binary trees, perform traversals, and solve tree-based puzzles.
+- **Graphs (Premium):** Graph Game – Learn graph concepts, traversals (BFS/DFS), shortest paths, cycles, and more with visual tools.
+- **Dynamic Programming:** Dynamic Programming Game – (Coming Soon) Solve optimization puzzles and master DP techniques.
+
+---
+
+## Level Progression System
+- **Sequential Unlocking:** Complete each level to unlock the next.
+- **Sidebar Menu:** Toggleable menu shows all levels, with visual indicators for completed, current, unlocked, and locked levels.
+- **Animated Progress:** Smooth transitions, pulsing effects, and progress bars.
+- **Reusable Component:** Consistent UX across all games.
+- **Progress Saved:** All progress is saved to your profile and can be resumed anytime.
+
+---
+
+## Tech Stack
+**Frontend:**
+- React 18, React Router, Styled Components, Framer Motion
+- DnD Kit, React D3 Tree, Axios
+- Tailwind CSS (for styling)
+
+**Backend:**
+- Node.js, Express.js
+- MongoDB (Mongoose)
+- JWT Authentication
+- Cloudinary (for media)
+- Razorpay (for payments)
+- Nodemailer (for email/OTP)
 
 ---
 
 ## Project Structure
 ```
 .
-├── server/         # Backend code
-├── client/         # Frontend code
-└── README.md       # Project documentation
+├── client/                          # Frontend (React)
+│   ├── public/                      # Static files (index.html, manifest, robots.txt)
+│   │   └── Heroimg.jfif
+│   ├── src/
+│   │   ├── assets/                  # Images and static assets
+│   │   │   └── Heroimg.jfif
+│   │   ├── components/              # All React components
+│   │   │   ├── AboutUs.js
+│   │   │   ├── Chatbot.js
+│   │   │   ├── Dashboard.js
+│   │   │   ├── Footer.js
+│   │   │   ├── Friends.js
+│   │   │   ├── Games.js
+│   │   │   ├── Leaderboard.js
+│   │   │   ├── Loading.js
+│   │   │   ├── Navbar.js
+│   │   │   ├── NotFound.js
+│   │   │   ├── PremiumPurchase.js
+│   │   │   ├── ProtectedRoute.js
+│   │   │   ├── Rewards.js
+│   │   │   ├── ScrollToTop.js
+│   │   │   ├── ScrollToTopButton.js
+│   │   │   ├── auth/                # Auth-related components
+│   │   │   │   ├── ForgotPassword.js
+│   │   │   │   ├── LoginForm.js
+│   │   │   │   ├── RegisterForm.js
+│   │   │   │   └── UserProfile.js
+│   │   │   ├── forum/               # Forum components
+│   │   │   │   ├── AskQuestion.js
+│   │   │   │   ├── ForumHome.js
+│   │   │   │   └── QuestionDetail.js
+│   │   │   ├── games/               # All game modules
+│   │   │   │   ├── BitManipulationMaster.js
+│   │   │   │   ├── ChainMastersAdventure.js
+│   │   │   │   ├── DynamicProgrammingGame.js
+│   │   │   │   ├── GameDecorations.js
+│   │   │   │   ├── GraphGame.js
+│   │   │   │   ├── HeapPriorityQueueMaster.js
+│   │   │   │   ├── ItemTypes.js
+│   │   │   │   ├── RecursionRealm.js
+│   │   │   │   ├── SortingMaster.js
+│   │   │   │   ├── StackQueueMaster.js
+│   │   │   │   ├── TreasureChestAdventure.js
+│   │   │   │   ├── TreeGame.js
+│   │   │   │   ├── WindowPointerMaster.js
+│   │   │   │   └── WordWizardQuest.js
+│   │   │   └── visualizers/         # (empty, for future visualizer modules)
+│   │   ├── config/                  # (empty, for future config files)
+│   │   ├── contexts/                # React context providers
+│   │   │   └── AuthContext.js
+│   │   ├── hooks/                   # Custom React hooks
+│   │   │   ├── useApi.js
+│   │   │   ├── useLoading.js
+│   │   │   └── useScrollTo.js
+│   │   ├── services/                # Service modules (API, progress, etc.)
+│   │   │   └── gameProgressService.js
+│   │   ├── utils/                   # Utility functions
+│   │   │   └── gameProgress.js
+│   │   ├── App.css
+│   │   ├── App.js
+│   │   ├── index.css
+│   │   └── index.js
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── package.2.json
+│   └── tailwind.config.js
+│
+├── server/                          # Backend (Node.js/Express)
+│   ├── config/                      # Configuration files
+│   │   ├── cloudinary.js
+│   │   ├── connectDB.js
+│   │   └── razorpay.js
+│   ├── controllers/                 # Route controllers
+│   │   ├── auth.controller.js
+│   │   ├── forum.controller.js
+│   │   ├── friends.controller.js
+│   │   ├── leaderboard.controller.js
+│   │   ├── premium.controller.js
+│   │   ├── rewards.controller.js
+│   ├── middleware/                  # Express middleware
+│   │   └── auth.middleware.js
+│   ├── models/                      # Mongoose models
+│   │   ├── ForumAnswer.js
+│   │   ├── ForumQuestion.js
+│   │   ├── Leaderboard.js
+│   │   ├── UserFriends.js
+│   │   ├── UserProfile.js
+│   │   ├── UserProgress.js
+│   │   └── topic.model.js
+│   ├── routes/                      # API route definitions
+│   │   ├── auth.routes.js
+│   │   ├── chatbot.routes.js
+│   │   ├── forum.routes.js
+│   │   ├── gameProgress.js
+│   │   ├── leaderboard.routes.js
+│   │   ├── premium.routes.js
+│   │   ├── rewards.routes.js
+│   │   ├── topic.routes.js
+│   │   └── user.routes.js
+│   ├── scripts/                     # Utility scripts (e.g., seeding)
+│   │   └── seedAllTopics.js
+│   ├── utils/                       # Utility modules
+│   │   └── email.js
+│   ├── server.js                    # Main server entry point
+│   ├── package.json
+│   └── package-lock.json
+│
+├── LEVEL_PROGRESSION_README.md      # Level progression system documentation
+├── README.md                        # Main project documentation
 ```
 
 ---
 
 ## Getting Started
-1. Navigate to the server directory and install dependencies:
+1. **Clone the repository:**
+   ```bash
+   git clone <your-repo-url>
+   cd <project-root>
+   ```
+2. **Install backend dependencies:**
    ```bash
    cd server
    npm install
    ```
-
-2. Navigate to the client directory and install dependencies:
+3. **Install frontend dependencies:**
    ```bash
-   cd client
+   cd ../client
    npm install
    ```
+4. **Set up environment variables:**
+   - Create `.env` files in both `server/` and `client/` as needed (see sample `.env.example` if provided).
+5. **Start the development servers:**
+   - Backend: `cd server && npm start`
+   - Frontend: `cd client && npm start`
+6. **Access the app:**
+   - Frontend: [http://localhost:3000](http://localhost:3000)
+   - Backend API: [http://localhost:5000](http://localhost:5000)
 
-3. Start the development servers:
-   - For backend: `cd server && npm start`
-   - For frontend: `cd client && npm start` 
+---
+
+## Authentication & Premium
+- **User Accounts:** Register, login, and manage your profile.
+- **Password Recovery:** Secure OTP-based password reset.
+- **Premium Games:** Purchase access to advanced games (Tree, Graph, Bundle) via Razorpay.
+- **Access Control:** Premium content is protected and only available to users with access.
+
+---
+
+## Community & Social Features
+- **Forum:** Ask questions, answer others, and discuss DSA topics.
+- **Friends:** Add friends, view their progress, and compete.
+- **Leaderboard:** See top performers and your global rank.
+- **Chatbot:** Get instant help and DSA explanations.
+
+---
+
+## Rewards & Achievements
+- **Earn Points:** Complete levels and games to earn points.
+- **Unlock Rewards:** Redeem points for real or virtual rewards (badges, kits, etc.).
+- **Achievements:** Collect badges for milestones and streaks.
+
+---
+
+## Contribution Guidelines
+1. **Fork the repository** and create your branch from `main`.
+2. **Describe your changes** clearly in pull requests.
+3. **Follow code style** and add comments where helpful.
+4. **Add tests** for new features if possible.
+5. **Be respectful** and constructive in discussions.
+
+---
+
+## Contact
+**Creator:** Vasu Aghera  
+**Role:** Full Stack Developer & DSA Enthusiast  
+**Mission:** Making DSA learning fun, accessible, and effective for everyone.  
+
+For questions, suggestions, or support, open an issue or contact via the project repository. 
