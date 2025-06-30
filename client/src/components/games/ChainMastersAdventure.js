@@ -323,6 +323,12 @@ const ChainMastersAdventure = () => {
         }
     }, [user, authLoading, navigate, loadProgress]);
 
+    // Update level start time when level changes
+    useEffect(() => {
+        setLevelStartTime(Date.now());
+        setLevelObjectiveMet(false);
+    }, [currentLevel]);
+
     // Main render condition: Show loading if auth is still loading
     if (authLoading) {
         return (
@@ -404,12 +410,6 @@ const ChainMastersAdventure = () => {
         setLevelObjectiveMet(false);
         setGameMessage(`Starting Level ${levelNumber}...`);
     }, []);
-
-    // Update level start time when level changes
-    useEffect(() => {
-        setLevelStartTime(Date.now());
-        setLevelObjectiveMet(false);
-    }, [currentLevel]);
 
     // Progress loading is handled by loadProgress function above
 
