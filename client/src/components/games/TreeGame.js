@@ -94,6 +94,7 @@ const TreeGame = () => {
   const [loadingPremium, setLoadingPremium] = useState(true);
   const [razorpayLoading, setRazorpayLoading] = useState(false);
 
+  const [completedLevels, setCompletedLevels] = useState(new Set());
 
   useEffect(() => {
     const checkPremium = async () => {
