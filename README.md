@@ -37,17 +37,19 @@ ClimbAlgoMountain transforms DSA learning into an adventure. Play interactive ga
 - **Bit Manipulation:** Toggle bits, perform AND/OR/XOR/NOT, solve bit puzzles, and pattern matching.
 - **Sliding Window & Two Pointer:** Solve classic sliding window and two-pointer problems interactively.
 - **Recursion:** Explore recursion with nesting dolls, factorials, Fibonacci, Tower of Hanoi, permutations, mazes, fractals, palindromes, and N-Queens.
+- **Strings:** Word Wizard Quest – Practice string manipulation, pattern matching, and word puzzles.
 - **Trees (Premium):** Visualize and build binary trees, perform traversals, and solve tree-based puzzles.
 - **Graphs (Premium):** Learn graph concepts, traversals (BFS/DFS), shortest paths, cycles, and more with visual tools.
 - **Dynamic Programming:** (Coming Soon) Solve optimization puzzles and master DP techniques.
-- **Word Games:** (e.g., Word Wizard Quest) for string and pattern practice.
 
 ### 🏆 Level Progression & Gamification
-- **Sequential Level Unlocking:** Complete each level to unlock the next, ensuring structured learning.
-- **Sidebar Level Menu:** Toggleable menu with visual indicators for completed, current, unlocked, and locked levels.
-- **Animated Progress:** Smooth transitions, pulsing effects, and progress bars.
+- **Multiple Levels per Game:** Each game is divided into several levels, allowing for gradual mastery of each topic.
+- **Manual Level Access:** All levels are accessible; there is currently no automatic unlocking system.
+- **Progress Tracking:** Your progress is tracked for each level and game.
 - **Score Tracking:** Earn points for each level and game completed.
 - **Achievements & Badges:** Collect badges for milestones, streaks, and high scores.
+
+> **Note:** The current system does not include animated transitions or a reusable sidebar/menu for level navigation. Level unlocking and advanced gamification features are planned for future updates.
 
 ### 📈 Progress Tracking & Analytics
 - **Personal Dashboard:** View your overall progress, scores, and completed topics.
