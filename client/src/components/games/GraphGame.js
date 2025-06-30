@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
+import { gameProgressService } from '../../services/gameProgressService';
+import { useAuth } from '../../contexts/AuthContext';
+import GameDecorations from './GameDecorations';
+
 // Helper throttle function
 const throttle = (func, delay) => {
   let inThrottle;
@@ -14,14 +18,11 @@ const throttle = (func, delay) => {
   };
 };
 
-import { gameProgressService } from '../../services/gameProgressService';
-import { useAuth } from '../../contexts/AuthContext';
-import GameDecorations from './GameDecorations';
-
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const GraphGame = () => {
   const { user } = useAuth();
+  // const [user, setUser] = useState(null);
   // Define level data
   const levelData = {
     1: {
@@ -649,6 +650,9 @@ const GraphGame = () => {
   const [levelStartTime, setLevelStartTime] = useState(Date.now());
   const [isSaving, setIsSaving] = useState(false);
   const [currentScore, setCurrentScore] = useState(0);
+
+  const [currentParent, setCurrentParent] = useState({});
+  const [currentRank, setCurrentRank] = useState({});
 
   // Add useEffect to get user data
   useEffect(() => {
@@ -2706,9 +2710,6 @@ const GraphGame = () => {
       rank[node.id] = 0;
     });
 
-    setCurrentParent(parent);
-    setCurrentRank(rank);
-
     let step = 0;
     const totalSteps = currentEdges.length;
 
@@ -2738,12 +2739,8 @@ const GraphGame = () => {
         }
       }
 
-      setCurrentParent({...parent});
-      setCurrentRank({...rank});
-      setVisualizationStep(step);
-
+      step++;
       visualizationTimeoutRef.current = setTimeout(() => {
-        step++;
         visualizeNextStep();
       }, 2000);
     };
@@ -4119,9 +4116,10 @@ const GraphGame = () => {
                     
                     if (!sourceNode || !targetNode) return null;
 
-                    let currentStroke = "#999";
+                    let currentStroke = "#1f77b4";
                     let currentStrokeWidth = "2";
                     let isHighlighted = false;
+                    // let edge = null;
 
                     if (currentLevel === 1 && selectedConcept === 'edges') {
                       currentStroke = "#dc2626"; // Red color
