@@ -120,7 +120,6 @@ const CORRECT_TOURNAMENT_ORDER = [
 const ChainMastersAdventure = () => {
     const navigate = useNavigate();
     const { user, loading: authLoading } = useAuth();
-    // All hooks at the top!
     const [currentLevel, setCurrentLevel] = useState(1);
     const [gameMessage, setGameMessage] = useState('Welcome, Chain Master!');
     const [levelObjectiveMet, setLevelObjectiveMet] = useState(false);
@@ -133,96 +132,6 @@ const ChainMastersAdventure = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [progress, setProgress] = useState({});
     const [showLevelsMenu, setShowLevelsMenu] = useState(true); // New state for levels menu
-    // Level 1 specific state
-    const [treasures, setTreasures] = useState(['Gold', 'Silver', 'Bronze', 'Copper', 'Iron']);
-    const [selectedTreasure, setSelectedTreasure] = useState(null);
-    const [chain, setChain] = useState([]);
-    const [currentStep, setCurrentStep] = useState(0);
-    const [forgeAnimation, setForgeAnimation] = useState(false);
-    const [showSuccess, setShowSuccess] = useState(false);
-    // Level 2 specific state
-    const [messagesChain, setMessagesChain] = useState([]);
-    const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
-    const [collectedMessages, setCollectedMessages] = useState([]);
-    const [traversalInProgress, setTraversalInProgress] = useState(false);
-    const [showLevel2Success, setShowLevel2Success] = useState(false);
-    const [currentAction, setCurrentAction] = useState('GET_DATA');
-    // Level 3 specific state
-    const [towerChain, setTowerChain] = useState([]);
-    const [selectedTower, setSelectedTower] = useState(null);
-    const [insertPosition, setInsertPosition] = useState(null);
-    const [constructionAnimation, setConstructionAnimation] = useState(false);
-    const [showLevel3Success, setShowLevel3Success] = useState(false);
-    const [currentInsertionType, setCurrentInsertionType] = useState(null); // 'head', 'tail', or 'middle'
-    const [blueprintVisible, setBlueprintVisible] = useState(false);
-    // Level 4 specific state
-    const [corruptedChain, setCorruptedChain] = useState([]);
-    const [selectedCorruptedLink, setSelectedCorruptedLink] = useState(null);
-    const [showLevel4Success, setShowLevel4Success] = useState(false);
-    // Level 5 specific state
-    const [doubleLinkedListChain, setDoubleLinkedListChain] = useState([]);
-    const [currentDoubleNodeIndex, setCurrentDoubleNodeIndex] = useState(0);
-    const [traversalDirection, setTraversalDirection] = useState(null); // 'forward' or 'backward'
-    const [showLevel5Success, setShowLevel5Success] = useState(false);
-    const [characterPosition, setCharacterPosition] = useState(0); // For visual traversal
-    // Level 6 specific state
-    const [portalNetwork, setPortalNetwork] = useState([]);
-    const [selectedPortalType, setSelectedPortalType] = useState(null);
-    const [portalActionMessage, setPortalActionMessage] = useState('');
-    const [showLevel6Success, setShowLevel6Success] = useState(false);
-    const [portalInsertPosition, setPortalInsertPosition] = useState(null);
-    const [portalDeletePosition, setPortalDeletePosition] = useState(null);
-    // Level 7: Circular Linked List State
-    const [seasonChain, setSeasonChain] = useState([]);
-    const [selectedSeason, setSelectedSeason] = useState(null);
-    const [showLevel7Success, setShowLevel7Success] = useState(false);
-    const [currentSeasonTraversalIndex, setCurrentSeasonTraversalIndex] = useState(0);
-    const [traversalSteps, setTraversalSteps] = useState(0);
-    const [cycleDetected, setCycleDetected] = useState(false);
-    // Level 8: Wheel of Fortune State
-    const [wheelOfFortuneChain, setWheelOfFortuneChain] = useState([]);
-    const [selectedPlayer, setSelectedPlayer] = useState(null);
-    const [showLevel8Success, setShowLevel8Success] = useState(false);
-    const [rotationPosition, setRotationPosition] = useState(0); // For visual rotation
-    const [playerActionMessage, setPlayerActionMessage] = useState('');
-    // Level 9: Chain Transformation State
-    const [transformationChain, setTransformationChain] = useState([]);
-    const [currentChainType, setCurrentChainType] = useState('singly'); // 'singly', 'doubly', 'circular'
-    const [transformationMessage, setTransformationMessage] = useState('');
-    const [showLevel9Success, setShowLevel9Success] = useState(false);
-    const [currentTransformationStep, setCurrentTransformationStep] = useState(0);
-    const [isTransforming, setIsTransforming] = useState(false);
-    const [vaultUnlocked, setVaultUnlocked] = useState(false);
-    // Level 10 State
-    const [serpentHealth, setSerpentHealth] = useState(100);
-    const [playerHealth, setPlayerHealth] = useState(100);
-    const [currentAttackPattern, setCurrentAttackPattern] = useState('coil');
-    const [serpentSegments, setSerpentSegments] = useState([]);
-    const [spellChain, setSpellChain] = useState([]);
-    const [protectionBarrier, setProtectionBarrier] = useState([]);
-    const [showLevel10Success, setShowLevel10Success] = useState(false);
-    const [battlePhase, setBattlePhase] = useState('preparation');
-    const [selectedChainType, setSelectedChainType] = useState('singly');
-    const [showDashboardButton, setShowDashboardButton] = useState(false);
-    // for progress
-    const { get, loading, error } = useApi();
-    const [LinkedlistGameProgress, setLinkedlistGameProgress] = useState(null);
-    // Level 10 state variables
-    const [challengeChain, setChallengeChain] = useState([]);
-    const [currentChallengeIndex, setCurrentChallengeIndex] = useState(0);
-    const [completedChallenges, setCompletedChallenges] = useState([]);
-    const [selectedChallenge, setSelectedChallenge] = useState(null);
-    const [solutionInput, setSolutionInput] = useState('');
-    const [puzzleChain, setPuzzleChain] = useState([]);
-    const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
-    const [solvedPuzzles, setSolvedPuzzles] = useState([]);
-    const [selectedPuzzle, setSelectedPuzzle] = useState(null);
-    const [puzzleInput, setPuzzleInput] = useState([]);
-    const [showHint, setShowHint] = useState(false);
-    const [currentList, setCurrentList] = useState([]);
-    // Add this near the top of the component with other state declarations
-    const [level2Completed, setLevel2Completed] = useState(false);
-    const [level3Completed, setLevel3Completed] = useState(false);
 
     // Debug logging for auth state
     useEffect(() => {
@@ -323,12 +232,6 @@ const ChainMastersAdventure = () => {
         }
     }, [user, authLoading, navigate, loadProgress]);
 
-    // Update level start time when level changes
-    useEffect(() => {
-        setLevelStartTime(Date.now());
-        setLevelObjectiveMet(false);
-    }, [currentLevel]);
-
     // Main render condition: Show loading if auth is still loading
     if (authLoading) {
         return (
@@ -353,6 +256,153 @@ const ChainMastersAdventure = () => {
             </div>
         );
     }
+
+    // Level 1 specific state
+    const [treasures, setTreasures] = useState(['Gold', 'Silver', 'Bronze', 'Copper', 'Iron']);
+    const [selectedTreasure, setSelectedTreasure] = useState(null);
+    const [chain, setChain] = useState([]);
+    const [currentStep, setCurrentStep] = useState(0);
+    const [forgeAnimation, setForgeAnimation] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const correctChainOrder = ['Gold', 'Silver', 'Bronze', 'Copper', 'Iron'];
+
+    // Level 2 specific state
+    const [messagesChain, setMessagesChain] = useState([]);
+    const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+    const [collectedMessages, setCollectedMessages] = useState([]);
+    const [traversalInProgress, setTraversalInProgress] = useState(false);
+    const [showLevel2Success, setShowLevel2Success] = useState(false);
+    const [currentAction, setCurrentAction] = useState('GET_DATA');
+
+    // Level 3 specific state
+    const [towerChain, setTowerChain] = useState([]);
+    const [selectedTower, setSelectedTower] = useState(null);
+    const [insertPosition, setInsertPosition] = useState(null);
+    const [constructionAnimation, setConstructionAnimation] = useState(false);
+    const [showLevel3Success, setShowLevel3Success] = useState(false);
+    const [currentInsertionType, setCurrentInsertionType] = useState(null); // 'head', 'tail', or 'middle'
+    const [blueprintVisible, setBlueprintVisible] = useState(false);
+
+    // Level 4 specific state
+    const [corruptedChain, setCorruptedChain] = useState([]);
+    const [selectedCorruptedLink, setSelectedCorruptedLink] = useState(null);
+    const [showLevel4Success, setShowLevel4Success] = useState(false);
+
+    // Level 5 specific state
+    const [doubleLinkedListChain, setDoubleLinkedListChain] = useState([]);
+    const [currentDoubleNodeIndex, setCurrentDoubleNodeIndex] = useState(0);
+    const [traversalDirection, setTraversalDirection] = useState(null); // 'forward' or 'backward'
+    const [showLevel5Success, setShowLevel5Success] = useState(false);
+    const [characterPosition, setCharacterPosition] = useState(0); // For visual traversal
+
+    // Level 6 specific state
+    const [portalNetwork, setPortalNetwork] = useState([]);
+    const [selectedPortalType, setSelectedPortalType] = useState(null);
+    const [portalActionMessage, setPortalActionMessage] = useState('');
+    const [showLevel6Success, setShowLevel6Success] = useState(false);
+    const [portalInsertPosition, setPortalInsertPosition] = useState(null);
+    const [portalDeletePosition, setPortalDeletePosition] = useState(null);
+
+    // Level 7: Circular Linked List State
+    const [seasonChain, setSeasonChain] = useState([]);
+    const [selectedSeason, setSelectedSeason] = useState(null);
+    const [showLevel7Success, setShowLevel7Success] = useState(false);
+    const [currentSeasonTraversalIndex, setCurrentSeasonTraversalIndex] = useState(0);
+    const [traversalSteps, setTraversalSteps] = useState(0);
+    const [cycleDetected, setCycleDetected] = useState(false);
+
+    // Level 8: Wheel of Fortune State
+    const [wheelOfFortuneChain, setWheelOfFortuneChain] = useState([]);
+    const [selectedPlayer, setSelectedPlayer] = useState(null);
+    const [showLevel8Success, setShowLevel8Success] = useState(false);
+    const [rotationPosition, setRotationPosition] = useState(0); // For visual rotation
+    const [playerActionMessage, setPlayerActionMessage] = useState('');
+
+    // Level 9: Chain Transformation State
+    const [transformationChain, setTransformationChain] = useState([]);
+    const [currentChainType, setCurrentChainType] = useState('singly'); // 'singly', 'doubly', 'circular'
+    const [transformationMessage, setTransformationMessage] = useState('');
+    const [showLevel9Success, setShowLevel9Success] = useState(false);
+    const correctTransformationOrder = ['singly', 'doubly', 'circular', 'singly']; // Example puzzle progression
+    const [currentTransformationStep, setCurrentTransformationStep] = useState(0);
+    const [isTransforming, setIsTransforming] = useState(false);
+    const [vaultUnlocked, setVaultUnlocked] = useState(false);
+
+    // Level 10 State
+    const [serpentHealth, setSerpentHealth] = useState(100);
+    const [playerHealth, setPlayerHealth] = useState(100);
+    const [currentAttackPattern, setCurrentAttackPattern] = useState('coil');
+    const [serpentSegments, setSerpentSegments] = useState([]);
+    const [spellChain, setSpellChain] = useState([]);
+    const [protectionBarrier, setProtectionBarrier] = useState([]);
+    const [showLevel10Success, setShowLevel10Success] = useState(false);
+    const [battlePhase, setBattlePhase] = useState('preparation');
+    const [selectedChainType, setSelectedChainType] = useState('singly');
+    const [showDashboardButton, setShowDashboardButton] = useState(false);
+
+    // for progress
+    const { get, loading, error } = useApi();
+    const [LinkedlistGameProgress, setLinkedlistGameProgress] = useState(null);
+
+    // Level 10 Constants
+    const SERPENT_SEGMENTS = [
+        { id: 'head', type: 'head', value: 10 },
+        { id: 'body1', type: 'body', value: 8 },
+        { id: 'body2', type: 'body', value: 8 },
+        { id: 'body3', type: 'body', value: 8 },
+        { id: 'tail', type: 'tail', value: 6 }
+    ];
+
+    const SPELL_TYPES = [
+        { id: 'fire', type: 'fire', value: 15 },
+        { id: 'ice', type: 'ice', value: 12 },
+        { id: 'lightning', type: 'lightning', value: 20 }
+    ];
+
+    const BARRIER_TYPES = [
+        { id: 'shield', type: 'shield', value: 10 },
+        { id: 'reflect', type: 'reflect', value: 15 },
+        { id: 'absorb', type: 'absorb', value: 20 }
+    ];
+
+    const ATTACK_PATTERNS = {
+        coil: {
+            name: 'Coiling Strike',
+            description: 'The serpent coils its body segments in a singly linked pattern',
+            requiredChain: 'singly',
+            damage: 15
+        },
+        spell: {
+            name: 'Bidirectional Spell',
+            description: 'The serpent casts spells that can be countered with bidirectional movement',
+            requiredChain: 'doubly',
+            damage: 20
+        },
+        barrier: {
+            name: 'Eternal Barrier',
+            description: 'The serpent creates a circular barrier that must be broken',
+            requiredChain: 'circular',
+            damage: 25
+        }
+    };
+
+    // Level 10 state variables
+    const [challengeChain, setChallengeChain] = useState([]);
+    const [currentChallengeIndex, setCurrentChallengeIndex] = useState(0);
+    const [completedChallenges, setCompletedChallenges] = useState([]);
+    const [selectedChallenge, setSelectedChallenge] = useState(null);
+    const [solutionInput, setSolutionInput] = useState('');
+    const [puzzleChain, setPuzzleChain] = useState([]);
+    const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
+    const [solvedPuzzles, setSolvedPuzzles] = useState([]);
+    const [selectedPuzzle, setSelectedPuzzle] = useState(null);
+    const [puzzleInput, setPuzzleInput] = useState([]);
+    const [showHint, setShowHint] = useState(false);
+    const [currentList, setCurrentList] = useState([]);
+
+    // Add this near the top of the component with other state declarations
+    const [level2Completed, setLevel2Completed] = useState(false);
+    const [level3Completed, setLevel3Completed] = useState(false);
 
     // Function to calculate score (fixed 10 per level)
     const calculateScore = (level) => 10;
@@ -410,6 +460,12 @@ const ChainMastersAdventure = () => {
         setLevelObjectiveMet(false);
         setGameMessage(`Starting Level ${levelNumber}...`);
     }, []);
+
+    // Update level start time when level changes
+    useEffect(() => {
+        setLevelStartTime(Date.now());
+        setLevelObjectiveMet(false);
+    }, [currentLevel]);
 
     // Progress loading is handled by loadProgress function above
 
