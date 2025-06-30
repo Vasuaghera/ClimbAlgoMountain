@@ -93,8 +93,7 @@ const TreeGame = () => {
   const [hasPremium, setHasPremium] = useState(false);
   const [loadingPremium, setLoadingPremium] = useState(true);
   const [razorpayLoading, setRazorpayLoading] = useState(false);
-  
-  const [completedLevels, setCompletedLevels] = useState(new Set());
+
 
   useEffect(() => {
     const checkPremium = async () => {
@@ -3233,7 +3232,9 @@ const TreeGame = () => {
 
 // Helper for saving progress for this game
 const saveProgress = async (level) => {
-  try {
+    
+  const [completedLevels, setCompletedLevels] = useState(new Set());
+  try { 
     await gameProgressService.saveProgress(TREE_TOPIC_ID, level, 10, 0); // Adjust score/time as needed
     
     // Update local state immediately
