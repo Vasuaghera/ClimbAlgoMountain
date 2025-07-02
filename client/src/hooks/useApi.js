@@ -2,8 +2,8 @@ import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-axios.defaults.baseURL = BACKEND_URL; // Use environment variable
+// const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+// axios.defaults.baseURL = BACKEND_URL; // Remove this line to use relative paths
 
 const useApi = () => {
   const [loading, setLoading] = useState(false);

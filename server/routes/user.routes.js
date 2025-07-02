@@ -125,11 +125,15 @@ router.patch('/profile', verifyToken, upload.single('avatar'), async (req, res) 
 
 // User search endpoint for friend requests (returns basic profile info)
 router.get('/search', verifyToken, async (req, res) => {
-    const { username } = req.query;
+    const { username, userId } = req.query;
+    if (userId) {
+        const user = await UserProfile.findById(userId, 'username _id avatar email');
+        return res.json({ users: user ? [user] : [] });
+    }
     if (!username) return res.json({ users: [] });
     const users = await UserProfile.find({
       username: { $regex: username, $options: 'i' }
-    }, 'username _id avatar');
+    }, 'username _id avatar email');
     res.json({ users });
 });
 

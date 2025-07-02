@@ -105,7 +105,7 @@ const QuestionDetail = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`${BACKEND_URL}/forum/questions/${id}`);
+      const res = await fetch(`/api/forum/questions/${id}`);
       const data = await res.json();
       setQuestion(data.question);
     } catch (err) {
@@ -125,7 +125,7 @@ const QuestionDetail = () => {
     setPosting(true);
     setPostError(null);
     try {
-      const res = await fetch(`${BACKEND_URL}/forum/questions/${id}/answers`, {
+      const res = await fetch(`/api/forum/questions/${id}/answers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -150,7 +150,7 @@ const QuestionDetail = () => {
   const handleUpvote = async (answerId) => {
     setUpvoteLoading(answerId);
     try {
-      const res = await fetch(`${BACKEND_URL}/forum/answers/${answerId}/upvote`, {
+      const res = await fetch(`/api/forum/answers/${answerId}/upvote`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });

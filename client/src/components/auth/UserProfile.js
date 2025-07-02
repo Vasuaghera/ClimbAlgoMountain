@@ -4,8 +4,6 @@ import useApi from '../../hooks/useApi';
 import { ProfileLoading } from '../Loading';
 import { useParams } from 'react-router-dom';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-
 const UserProfile = () => {
   const { user: loggedInUser, updateProfile, error } = useAuth();
   const { get } = useApi();
@@ -21,44 +19,68 @@ const UserProfile = () => {
   const [userProgress, setUserProgress] = useState({ score: null, level: null });
   const [userRank, setUserRank] = useState(null);
   const [overallScore, setOverallScore] = useState(null);
+  const [leaderboardScore, setLeaderboardScore] = useState(null);
+
+  // Move fetchProfile outside useEffect so it can be called after save
+  const fetchProfile = async () => {
+    try {
+      let profileData;
+      if (userId) {
+        // Fetch another user's profile (friend)
+        profileData = await get(`/api/user/search?userId=${userId}`);
+        // The search endpoint returns an array, so find the correct user
+        const found = profileData.users?.find(u => u._id === userId);
+        setProfileUser(found || null);
+        setFormData({
+          username: found?.username || '',
+          email: found?.email || ''
+        });
+      } else {
+        // Fetch logged-in user's profile
+        profileData = await get(`/api/user/profile`);
+        const userData = profileData.user || profileData;
+        setProfileUser(userData);
+        setFormData({
+          username: userData.username || '',
+          email: userData.email || ''
+        });
+      }
+      // Fetch stats (score, progress, etc.)
+      const progressData = await get(`/api/game-progress/all-progress${userId ? `?userId=${userId}` : ''}`);
+      if (progressData && Array.isArray(progressData.progress)) {
+        const total = progressData.progress.reduce((sum, topic) => sum + (topic.totalScore || 0), 0);
+        setOverallScore(total);
+        // Set userProgress for level and score
+        const maxLevel = Math.max(...progressData.progress.map(topic => topic.level || 1));
+        setUserProgress({
+          level: maxLevel,
+          score: total
+        });
+      } else {
+        setOverallScore(0);
+        setUserProgress({ level: 1, score: 0 });
+      }
+      // Fetch leaderboard score for friend
+      if (userId) {
+        const leaderboardData = await get(`/api/leaderboard?limit=1000`);
+        if (leaderboardData && leaderboardData.leaderboard) {
+          const found = leaderboardData.leaderboard.find(u => u.userId === userId || u.username === profileData.users?.[0]?.username);
+          setLeaderboardScore(found ? found.score : 0);
+        } else {
+          setLeaderboardScore(0);
+        }
+      } else {
+        setLeaderboardScore(null);
+      }
+    } catch (err) {
+      setProfileUser(null);
+      setOverallScore('N/A');
+      setIsLoading(false);
+      setLeaderboardScore(null);
+    }
+  };
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        let profileData;
-        if (userId) {
-          // Fetch another user's profile (friend)
-          profileData = await get(`${BACKEND_URL}/api/user/search?userId=${userId}`);
-          // The search endpoint returns an array, so find the correct user
-          const found = profileData.users?.find(u => u._id === userId);
-          setProfileUser(found || null);
-          setFormData({
-            username: found?.username || '',
-            email: found?.email || ''
-          });
-        } else {
-          // Fetch logged-in user's profile
-          profileData = await get(`${BACKEND_URL}/api/user/profile`);
-          const userData = profileData.user || profileData;
-          setProfileUser(userData);
-          setFormData({
-            username: userData.username || '',
-            email: userData.email || ''
-          });
-        }
-        // Fetch stats (score, progress, etc.)
-        const progressData = await get(`${BACKEND_URL}/api/game-progress/all-progress${userId ? `?userId=${userId}` : ''}`);
-        if (progressData && Array.isArray(progressData.progress)) {
-          const total = progressData.progress.reduce((sum, topic) => sum + (topic.totalScore || 0), 0);
-          setOverallScore(total);
-        } else {
-          setOverallScore(0);
-        }
-      } catch (err) {
-        setProfileUser(null);
-        setOverallScore('N/A');
-      }
-    };
     fetchProfile();
   }, [get, userId]);
 
@@ -66,7 +88,7 @@ const UserProfile = () => {
     const fetchRank = async () => {
       if (!profileUser) return;
       try {
-        const leaderboardData = await get(`${BACKEND_URL}/api/leaderboard?limit=100`);
+        const leaderboardData = await get(`/api/leaderboard?limit=100`);
         if (leaderboardData && leaderboardData.leaderboard) {
           const found = leaderboardData.leaderboard.find(u => u.username === profileUser.username);
           setUserRank(found && found.rank != null ? found.rank : 'N/A');
@@ -79,6 +101,16 @@ const UserProfile = () => {
     };
     fetchRank();
   }, [get, profileUser]);
+
+  useEffect(() => {
+    setIsEditing(false);
+    setProfileUser(null);
+    setFormData({ username: '', email: '' });
+    setUserProgress({ score: null, level: null });
+    setUserRank(null);
+    setOverallScore(null);
+    setLeaderboardScore(null);
+  }, [userId]);
 
   const isOwnProfile = !userId || (profileUser && loggedInUser && profileUser._id === loggedInUser._id);
 
@@ -105,12 +137,13 @@ const UserProfile = () => {
         data.append('avatar', avatarFile);
       }
       await updateProfile(data, true); // true = isFormData
-      setIsEditing(false);
-      
+      // setIsEditing(false); // <--- Remove or comment out this line
+      window.scrollTo(0, 0); // Scroll to top after saving changes
+      await fetchProfile(); // Refresh profile data after save
       // Refresh rank data after profile update to reflect any username changes
       const fetchRank = async () => {
         try {
-          const leaderboardData = await get(`${BACKEND_URL}/api/leaderboard?limit=100`);
+          const leaderboardData = await get(`/api/leaderboard?limit=100`);
           if (leaderboardData && leaderboardData.leaderboard) {
             const found = leaderboardData.leaderboard.find(u => u.username === formData.username);
             setUserRank(found && found.rank != null ? found.rank : 'N/A');
@@ -128,7 +161,17 @@ const UserProfile = () => {
   };
 
   if (!profileUser) {
-    return <ProfileLoading />;
+    return (
+      <div className="min-h-screen flex items-center justify-center font-mono">
+        <div className="text-center">
+          <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <span className="text-3xl">⚠️</span>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Error Loading Profile</h2>
+          <p className="text-gray-600 mb-6">Unable to load user profile. Please check your connection or try again later.</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -166,11 +209,6 @@ const UserProfile = () => {
                 </div>
               );
             })()}
-            <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center border-2 border-white shadow-lg">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-            </div>
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold mb-4 font-mono tracking-wider text-green-600">
@@ -206,10 +244,14 @@ const UserProfile = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-mono tracking-wider text-green-600">
-              YOUR STATISTICS
+              {isOwnProfile
+                ? 'YOUR STATISTICS'
+                : `${profileUser.username?.toUpperCase() || 'USER'}'S STATISTICS`}
             </h2>
             <p className="text-gray-700 text-lg font-mono">
-              Track your progress and achievements
+              {isOwnProfile
+                ? 'Track your progress and achievements'
+                : `Track ${profileUser.username ? profileUser.username + "'s" : 'this user\'s'} progress and achievements`}
             </p>
           </div>
           
@@ -233,7 +275,9 @@ const UserProfile = () => {
                   <span className="text-2xl">🏆</span>
                 </div>
                 <span className="text-3xl font-bold text-green-600 font-mono">
-                  {overallScore === 0 ? '0' : (overallScore ?? '0')}
+                  {isOwnProfile
+                    ? (overallScore === 0 ? '0' : (overallScore ?? '0'))
+                    : (leaderboardScore !== null ? leaderboardScore : '0')}
                 </span>
               </div>
               <h3 className="text-lg font-bold text-gray-800 mb-1 font-mono">Total Score</h3>
@@ -285,15 +329,13 @@ const UserProfile = () => {
                   <label className="block text-sm font-bold text-green-600 mb-2 font-mono">Email</label>
                   <p className="text-gray-800 font-mono text-lg">{profileUser.email}</p>
                 </div>
-                <div>
-                  <label className="block text-sm font-bold text-green-600 mb-2 font-mono">Member Since</label>
-                  <p className="text-gray-800 font-mono text-lg">{new Date().toLocaleDateString()}</p>
-                </div>
               </div>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600 font-mono">Total Score</span>
-                  <span className="text-gray-800 font-bold font-mono text-lg">{overallScore || 0}</span>
+                  <span className="text-gray-800 font-bold font-mono text-lg">
+                    {isOwnProfile ? (overallScore || 0) : (leaderboardScore !== null ? leaderboardScore : 0)}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600 font-mono">Current Level</span>
@@ -439,10 +481,12 @@ const UserProfile = () => {
                 </div>
               </form>
             ) : (
-              <div className="text-center py-8">
-                <span className="text-4xl mb-4 block">👤</span>
-                <p className="text-gray-600 mb-6 font-mono">This is a public profile. You can view your friend's DSA stats and achievements here.</p>
-              </div>
+              !isOwnProfile && !isEditing && (
+                <div className="text-center py-8">
+                  <span className="text-4xl mb-4 block">👤</span>
+                  <p className="text-gray-600 mb-6 font-mono">This is a public profile. You can view your friend's DSA stats and achievements here.</p>
+                </div>
+              )
             )}
           </div>
         </div>
