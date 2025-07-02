@@ -97,20 +97,20 @@ const TreeGame = () => {
   const [completedLevels, setCompletedLevels] = useState(new Set());
 
   // Helper for saving progress for this game
-const saveProgress = async (level) => {
-  try {
-    await gameProgressService.saveProgress(TREE_TOPIC_ID, level, 10, 0); // Adjust score/time as needed
-    // Update local state immediately
-    setCompletedLevels(prev => {
-      const newState = new Set([...prev, level]);
-      console.log('Updated completed levels:', Array.from(newState));
-      return newState;
-    });
-    console.log(`Successfully saved progress for level ${level}`);
-  } catch (e) {
-    console.error('Failed to save progress:', e);
-  }
-};
+  const saveProgress = async (level) => {
+    try {
+      await gameProgressService.saveProgress(TREE_TOPIC_ID, level, 10, 0); // Adjust score/time as needed
+      // Update local state immediately
+      setCompletedLevels(prev => {
+        const newState = new Set([...prev, level]);
+        console.log('Updated completed levels:', Array.from(newState));
+        return newState;
+      });
+      console.log(`Successfully saved progress for level ${level}`);
+    } catch (e) {
+      console.error('Failed to save progress:', e);
+    }
+  };
 
   useEffect(() => {
     const checkPremium = async () => {
@@ -3245,24 +3245,6 @@ const saveProgress = async (level) => {
       )}
     </div>
   );
-};
-
-// Helper for saving progress for this game
-const saveProgress = async (level) => {
-  try {
-    await gameProgressService.saveProgress(TREE_TOPIC_ID, level, 10, 0); // Adjust score/time as needed
-    
-    // Update local state immediately
-    setCompletedLevels(prev => {
-      const newState = new Set([...prev, level]);
-      console.log('Updated completed levels:', Array.from(newState));
-      return newState;
-    });
-    
-    console.log(`Successfully saved progress for level ${level}`);
-  } catch (e) {
-    console.error('Failed to save progress:', e);
-  }
 };
 
 export default TreeGame;
