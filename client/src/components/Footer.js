@@ -131,7 +131,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center text-gray-600 text-sm">
                 <span className="mr-2">🌐</span>
-                www.dsagame.com
+                https://climb-algo-mountain-v27d.vercel.app/login
               </div>
               <div className="flex items-center text-gray-600 text-sm">
                 <span className="mr-2">📱</span>
