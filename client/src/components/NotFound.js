@@ -55,39 +55,6 @@ const NotFound = () => {
 
         {/* Navigation Buttons */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          {/* Go to Dashboard Button */}
-          <Link
-            to="/dashboard"
-            className="group relative inline-flex items-center justify-center px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 hover:-translate-y-1 transition-all duration-500 font-mono tracking-widest overflow-hidden border-2 border-white/20"
-            style={{
-              background: 'linear-gradient(45deg, #16a34a 0%, #22c55e 25%, #3b82f6 50%, #1d4ed8 75%, #1e40af 100%)',
-              backgroundSize: '300% 300%',
-              animation: 'gradientShift 3s ease infinite',
-              boxShadow: '0 20px 40px rgba(34, 197, 94, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)',
-            }}
-          >
-            {/* Animated background overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-            
-            {/* Glowing effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-green-400/30 via-blue-400/30 to-purple-400/30 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-            
-            {/* Button content */}
-            <div className="relative flex items-center space-x-3 z-10">
-              <span className="text-2xl animate-bounce">📊</span>
-              <span className="relative">
-                GO TO DASHBOARD
-                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></div>
-              </span>
-              <span className="text-2xl animate-pulse">⚡</span>
-            </div>
-            
-            {/* Sparkle effects */}
-            <div className="absolute -top-2 -left-2 w-4 h-4 bg-yellow-400 rounded-full animate-ping opacity-75"></div>
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-pink-400 rounded-full animate-ping opacity-75" style={{animationDelay: '0.5s'}}></div>
-            <div className="absolute -bottom-1 left-4 w-2 h-2 bg-blue-400 rounded-full animate-ping opacity-75" style={{animationDelay: '1s'}}></div>
-          </Link>
-
           {/* Go to Home Button */}
           <Link
             to="/"

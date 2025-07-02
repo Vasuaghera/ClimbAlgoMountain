@@ -41,8 +41,14 @@ const Navbar = () => {
       .toUpperCase();
   };
 
+  // Helper to get full user ID
+  const getFullUserId = (user) => {
+    if (!user) return '';
+    return user._id || user.id || '';
+  };
+
   const navLinks = [
-    { to: '/', label: 'Home', always: true },
+    { to: '/', label: 'Home', auth: true },
     { to: '/games', label: 'Games', auth: true },
     { to: '/leaderboard', label: 'Leaderboard', auth: true },
     { to: '/rewards', label: 'Rewards', auth: true },
@@ -50,7 +56,6 @@ const Navbar = () => {
     { to: '/forum', label: 'Q&A', auth: true },
     { to: '/chatbot', label: 'Chatbot', auth: true },
     { to: '/about', label: 'About', always: true },
-    { to: '/profile', label: 'Profile', auth: true },
   ];
 
   return (
@@ -69,6 +74,16 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
+            {/* Custom Profile Link */}
+            {user && (
+              <Link
+                to={`/profile/${getFullUserId(user)}`}
+                className="text-gray-800 hover:text-green-600 font-bold uppercase tracking-widest px-2 py-1 transition-colors duration-150 border-b-2 border-transparent hover:border-green-600 whitespace-nowrap"
+                style={{ fontFamily: 'monospace', fontSize: '1rem', letterSpacing: '0.13em' }}
+              >
+                Profile
+              </Link>
+            )}
           </div>
 
           {/* Right-aligned User section (desktop) */}
@@ -138,6 +153,17 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
+            {/* Custom Profile Link for mobile */}
+            {user && (
+              <Link
+                to={`/profile/${getFullUserId(user)}`}
+                className="text-gray-800 hover:text-green-600 font-bold uppercase tracking-widest py-1 border-b-2 border-transparent hover:border-green-600"
+                style={{ fontFamily: 'monospace', fontSize: '1rem', letterSpacing: '0.13em' }}
+                onClick={() => setMenuOpen(false)}
+              >
+                Profile
+              </Link>
+            )}
             <div className="border-t border-gray-200 my-2" />
             {user ? (
               <>

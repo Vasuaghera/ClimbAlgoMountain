@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import useApi from '../hooks/useApi';
 import { useLoading } from '../hooks/useLoading';
-import { DataLoading } from './Loading';
+import { LeaderboardLoading } from './Loading';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -70,7 +70,7 @@ const Leaderboard = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen pt-24 bg-white flex items-center justify-center">
-        <DataLoading />
+        <LeaderboardLoading />
       </div>
     );
   }

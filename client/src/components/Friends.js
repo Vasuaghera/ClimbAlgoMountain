@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import useApi from '../hooks/useApi';
 import { useAuth } from '../contexts/AuthContext';
 import { useLoading } from '../hooks/useLoading';
-import { DataLoading } from './Loading';
+import { FriendsLoading } from './Loading';
+import { Link } from 'react-router-dom';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -192,7 +193,7 @@ const Friends = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center font-mono">
-        <DataLoading />
+        <FriendsLoading />
       </div>
     );
   }
@@ -358,16 +359,16 @@ const Friends = () => {
                   <div className="space-y-4">
                     {friends.map(friend => (
                       <div key={friend._id} className="flex items-center justify-between p-4 bg-gray-50 rounded-2xl border-2 border-gray-100 hover:border-green-200 hover:shadow-lg transition-all duration-300">
-                        <div className="flex items-center space-x-4">
-                          <div className={`w-12 h-12 bg-gradient-to-r ${getRandomColor(friend.username)} rounded-2xl flex items-center justify-center shadow-lg`}>
+                        <Link to={`/profile/${friend._id}`} className="flex items-center space-x-4 group">
+                          <div className={`w-12 h-12 bg-gradient-to-r ${getRandomColor(friend.username)} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
                             <span className="text-white font-bold text-lg">
                               {getInitials(friend.username)}
                             </span>
                           </div>
                           <div>
-                            <div className="text-lg font-bold text-gray-800">{friend.username}</div>
+                            <div className="text-lg font-bold text-gray-800 group-hover:text-green-600 transition-colors">{friend.username}</div>
                           </div>
-                        </div>
+                        </Link>
                         <button
                           onClick={() => handleRemoveFriend(friend._id)}
                           className="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-xl font-semibold hover:from-red-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg"

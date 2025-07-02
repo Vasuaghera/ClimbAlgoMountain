@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { QALoading } from '../Loading';
 
 const ForumHome = () => {
   const [questions, setQuestions] = useState([]);
@@ -144,17 +145,7 @@ const ForumHome = () => {
   const filteredQuestions = getFilteredAndSortedQuestions();
 
   if (loading) {
-    return (
-      <div className="min-h-screen pt-24 bg-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-2xl shadow-lg mb-6">
-            <div className="animate-spin rounded-full h-8 w-8 border-2 border-white border-t-transparent"></div>
-          </div>
-          <h3 className="text-lg font-bold text-gray-800 mb-2 font-mono">Loading Community Questions</h3>
-          <p className="text-green-600">Fetching the latest discussions...</p>
-        </div>
-      </div>
-    );
+    return <QALoading />;
   }
 
   if (error) {

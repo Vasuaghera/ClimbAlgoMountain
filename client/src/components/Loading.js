@@ -92,9 +92,34 @@ export const AuthLoading = () => (
   />
 );
 
+export const LeaderboardLoading = () => (
+  <Loading 
+    fullScreen={true}
+    customText="Loading Leaderboard..."
+    size="medium"
+  />
+);
+
 export const DataLoading = () => (
   <Loading 
-    customText="Loading Data..."
+    fullScreen={true}
+    customText="Loading Rewards..."
+    size="medium"
+  />
+);
+
+export const FriendsLoading = () => (
+  <Loading 
+    fullScreen={true}
+    customText="Loading Friends..."
+    size="medium"
+  />
+);
+
+export const ProfileLoading = () => (
+  <Loading 
+    fullScreen={true}
+    customText="Loading Profile..."
     size="medium"
   />
 );
@@ -107,6 +132,14 @@ export const InlineLoading = ({ text, size }) => (
   <Loading 
     text={text}
     size={size}
+  />
+);
+
+export const QALoading = () => (
+  <Loading 
+    fullScreen={true}
+    customText="Loading Q&A..."
+    size="large"
   />
 );
 

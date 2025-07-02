@@ -377,6 +377,10 @@ const Games = () => {
     </div>
   );
 
+  if (isLoading) {
+    return <GameLoading />;
+  }
+
   if (authLoading || apiLoading) {
     return <div>Loading dashboard...</div>;
   }
@@ -405,9 +409,6 @@ const Games = () => {
 
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-start font-mono relative overflow-hidden">
-      {/* Loading Animation */}
-      {isLoading && <GameLoading />}
-      
       {/* CSS Animation for gradient shift */}
       <style jsx>{`
         @keyframes gradientShift {

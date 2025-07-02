@@ -242,10 +242,11 @@ const Rewards = () => {
   const totalRewards = rewards.length;
   const redeemedRewards = user.redeemedRewards?.length || 0;
 
+  if (isLoading || fetchingScore) return <DataLoading />;
+  
   return (
     <div className="min-h-screen bg-white font-mono relative overflow-hidden">
       {/* Loading Animation */}
-      {(isLoading || fetchingScore) && <DataLoading />}
       
       {/* CSS Animation for gradient shift */}
       <style jsx>{`
@@ -260,16 +261,15 @@ const Rewards = () => {
       `}</style>
 
       {/* Hero Section */}
-      <div className="w-full bg-gradient-to-b from-green-200 via-green-100 via-green-50 to-white py-16 relative">
+      <div className="w-full bg-gradient-to-b from-green-200 via-green-100 via-green-50 to-white py-8 relative">
         {/* Decorative DSA elements */}
         <ArrayDecoration position="top-10 left-10" />
         <TreeDecoration position="top-20 right-20" />
         <LinkedListDecoration position="bottom-10 left-20" />
         <StackDecoration position="bottom-20 right-10" />
-        
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 rounded-2xl mb-6 shadow-xl">
               <span className="text-3xl">🏆</span>
             </div>
@@ -279,6 +279,57 @@ const Rewards = () => {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Unlock amazing rewards as you master DSA concepts and climb the leaderboard
             </p>
+          </div>
+          {/* Centered Stats Dashboard - moved up */}
+          <div className="flex flex-col items-center justify-center min-h-[180px]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+              {/* Current Score Card */}
+              <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 hover:border-orange-200 transition-all duration-300">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-600 text-sm mb-2">Current Score</p>
+                    <p className="text-4xl font-bold text-orange-600">{fetchedScore ?? 0}</p>
+                  </div>
+                  <div className="w-14 h-14 bg-gradient-to-r from-orange-500 via-yellow-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg">
+                    <span className="text-xl">🎯</span>
+                  </div>
+                </div>
+              </div>
+              {/* Unlocked, Redeemed, and Available Cards */}
+              <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 hover:border-green-200 transition-all duration-300">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-600 text-sm mb-2">Unlocked</p>
+                    <p className="text-4xl font-bold text-green-600">{unlockedRewards}</p>
+                  </div>
+                  <div className="w-14 h-14 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg">
+                    <span className="text-xl">🔓</span>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 hover:border-blue-200 transition-all duration-300">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-600 text-sm mb-2">Redeemed</p>
+                    <p className="text-4xl font-bold text-blue-600">{redeemedRewards}</p>
+                  </div>
+                  <div className="w-14 h-14 bg-gradient-to-from-blue-500 via-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
+                    <span className="text-xl">✅</span>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 hover:border-purple-200 transition-all duration-300">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-600 text-sm mb-2">Available</p>
+                    <p className="text-4xl font-bold text-purple-600">{totalRewards}</p>
+                  </div>
+                  <div className="w-14 h-14 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-2xl flex items-center justify-center shadow-lg">
+                    <span className="text-xl">🎯</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -292,56 +343,6 @@ const Rewards = () => {
         <LinkedListDecoration position="bottom-20 right-10" />
         
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          {/* Stats Dashboard */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            {/* Current Score Card */}
-            <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 hover:border-orange-200 transition-all duration-300">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-600 text-sm mb-2">Current Score</p>
-                  <p className="text-4xl font-bold text-orange-600">{fetchedScore ?? 0}</p>
-                </div>
-                <div className="w-14 h-14 bg-gradient-to-r from-orange-500 via-yellow-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg">
-                  <span className="text-xl">🎯</span>
-                </div>
-              </div>
-            </div>
-            {/* Unlocked, Redeemed, and Available Cards */}
-            <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 hover:border-green-200 transition-all duration-300">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-600 text-sm mb-2">Unlocked</p>
-                  <p className="text-4xl font-bold text-green-600">{unlockedRewards}</p>
-                </div>
-                <div className="w-14 h-14 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg">
-                  <span className="text-xl">🔓</span>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 hover:border-blue-200 transition-all duration-300">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-600 text-sm mb-2">Redeemed</p>
-                  <p className="text-4xl font-bold text-blue-600">{redeemedRewards}</p>
-                </div>
-                <div className="w-14 h-14 bg-gradient-to-from-blue-500 via-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
-                  <span className="text-xl">✅</span>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 hover:border-purple-200 transition-all duration-300">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-600 text-sm mb-2">Available</p>
-                  <p className="text-4xl font-bold text-purple-600">{totalRewards}</p>
-                </div>
-                <div className="w-14 h-14 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-2xl flex items-center justify-center shadow-lg">
-                  <span className="text-xl">🎯</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* TEMP: Manual update button for testing */}
           <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 mb-8 hover:border-green-200 transition-all duration-300">
             

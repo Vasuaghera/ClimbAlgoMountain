@@ -1,13 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { useLoading } from '../hooks/useLoading';
-import { DataLoading } from './Loading';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const Chatbot = () => {
   const { user } = useAuth();
-  const { isLoading, withLoading } = useLoading();
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([
     {
@@ -16,7 +13,6 @@ const Chatbot = () => {
       timestamp: new Date()
     }
   ]);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
@@ -91,51 +87,38 @@ const Chatbot = () => {
 
   const handleSend = async (e) => {
     e.preventDefault();
-    if (!input.trim() || loading) return;
+    if (!input.trim()) return;
 
     const userMessage = input.trim();
     setInput('');
-    
-    // Add user message and scroll immediately
     setMessages(prev => [...prev, { from: 'user', text: userMessage, timestamp: new Date() }]);
-    
-    setLoading(true);
     setError(null);
     setIsTyping(true);
-
     try {
-      await withLoading(async () => {
       const res = await fetch(`${BACKEND_URL}/api/chatbot/ask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: userMessage })
       });
-
       if (!res.ok) {
         throw new Error('Failed to get response');
       }
-
       const data = await res.json();
-      
-      // Simulate typing delay for better UX
       setTimeout(() => {
         setIsTyping(false);
-        setMessages(prev => [...prev, { 
-          from: 'bot', 
-          text: data.answer || 'Sorry, I could not generate an answer. Please try again.', 
-          timestamp: new Date() 
+        setMessages(prev => [...prev, {
+          from: 'bot',
+          text: data.answer || 'Sorry, I could not generate an answer. Please try again.',
+          timestamp: new Date()
         }]);
-        setLoading(false);
       }, 1000);
-      }, 'Getting AI Response...');
     } catch (err) {
       setIsTyping(false);
-      setLoading(false);
       setError('Failed to get answer from chatbot. Please check your connection and try again.');
-      setMessages(prev => [...prev, { 
-        from: 'bot', 
-        text: 'Sorry, I encountered an error. Please try again later.', 
-        timestamp: new Date() 
+      setMessages(prev => [...prev, {
+        from: 'bot',
+        text: 'Sorry, I encountered an error. Please try again later.',
+        timestamp: new Date()
       }]);
     }
   };
@@ -299,9 +282,6 @@ const Chatbot = () => {
 
   return (
     <div className="h-screen bg-white flex flex-col font-mono relative overflow-hidden">
-      {/* Loading Animation */}
-      {isLoading && <DataLoading />}
-      
       {/* CSS Animation for gradient shift */}
       <style jsx>{`
         @keyframes gradientShift {
@@ -404,25 +384,12 @@ const Chatbot = () => {
                   placeholder="Ask me anything about DSA..."
                   value={input}
                   onChange={e => setInput(e.target.value)}
-                  disabled={loading}
                 />
                 <button
                   type="submit"
-                  className={`px-6 py-3 rounded-xl font-bold font-mono transition-all duration-200 ${
-                    loading || !input.trim()
-                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                      : 'bg-gradient-to-r from-green-500 to-blue-600 text-white hover:from-green-600 hover:to-blue-700 transform hover:scale-105 shadow-lg'
-                  }`}
-                  disabled={loading || !input.trim()}
+                  className="px-6 py-3 rounded-xl font-bold font-mono transition-all duration-200 bg-gradient-to-r from-green-500 to-blue-600 text-white hover:from-green-600 hover:to-blue-700 transform hover:scale-105 shadow-lg"
                 >
-                  {loading ? (
-                    <div className="flex items-center">
-                      <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
-                      Sending
-                    </div>
-                  ) : (
-                    'Send'
-                  )}
+                  Send
                 </button>
               </form>
               

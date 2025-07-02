@@ -82,6 +82,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/profile/:userId"
+              element={
+                <ProtectedRoute>
+                  <UserProfile />
+                </ProtectedRoute>
+              }
+            />
             {/* Route for the Treasure Chest Adventure game */}
             <Route
               path="/arrays"

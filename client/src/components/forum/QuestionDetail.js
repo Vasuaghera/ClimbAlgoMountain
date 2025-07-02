@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { QALoading } from '../Loading';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -179,14 +180,7 @@ const QuestionDetail = () => {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center font-mono">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-green-500 border-t-transparent mx-auto mb-6"></div>
-          <p className="text-gray-600 text-lg">Loading question...</p>
-        </div>
-      </div>
-    );
+    return <QALoading />;
   }
 
   if (error) {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { QALoading } from '../Loading';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -128,6 +129,10 @@ const AskQuestion = () => {
     { id: 'concepts', name: 'General Concepts', icon: '🧠' },
     { id: 'other', name: 'Other', icon: '❓' }
   ];
+
+  if (loading) {
+    return <QALoading />;
+  }
 
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-start font-mono relative overflow-hidden">

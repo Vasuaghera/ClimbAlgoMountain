@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import useApi from '../../hooks/useApi';
+import { ProfileLoading } from '../Loading';
+import { useParams } from 'react-router-dom';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const UserProfile = () => {
-  const { user, updateProfile, error } = useAuth();
+  const { user: loggedInUser, updateProfile, error } = useAuth();
   const { get } = useApi();
+  const { userId } = useParams();
+  const [profileUser, setProfileUser] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    username: user?.username || '',
-    email: user?.email || ''
+    username: '',
+    email: ''
   });
   const [avatarFile, setAvatarFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,14 +25,29 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const profileData = await get(`${BACKEND_URL}/api/user/profile`);
-        const userData = profileData.user || profileData;
-        setUserProgress({
-          score: userData.score ?? 'N/A',
-          level: userData.level ?? 'N/A'
-        });
-        // Fetch overall score from game-progress (same as dashboard)
-        const progressData = await get(`${BACKEND_URL}/api/game-progress/all-progress`);
+        let profileData;
+        if (userId) {
+          // Fetch another user's profile (friend)
+          profileData = await get(`${BACKEND_URL}/api/user/search?userId=${userId}`);
+          // The search endpoint returns an array, so find the correct user
+          const found = profileData.users?.find(u => u._id === userId);
+          setProfileUser(found || null);
+          setFormData({
+            username: found?.username || '',
+            email: found?.email || ''
+          });
+        } else {
+          // Fetch logged-in user's profile
+          profileData = await get(`${BACKEND_URL}/api/user/profile`);
+          const userData = profileData.user || profileData;
+          setProfileUser(userData);
+          setFormData({
+            username: userData.username || '',
+            email: userData.email || ''
+          });
+        }
+        // Fetch stats (score, progress, etc.)
+        const progressData = await get(`${BACKEND_URL}/api/game-progress/all-progress${userId ? `?userId=${userId}` : ''}`);
         if (progressData && Array.isArray(progressData.progress)) {
           const total = progressData.progress.reduce((sum, topic) => sum + (topic.totalScore || 0), 0);
           setOverallScore(total);
@@ -36,21 +55,20 @@ const UserProfile = () => {
           setOverallScore(0);
         }
       } catch (err) {
-        setUserProgress({ score: 'N/A', level: 'N/A' });
+        setProfileUser(null);
         setOverallScore('N/A');
       }
     };
     fetchProfile();
-  }, [get]);
+  }, [get, userId]);
 
   useEffect(() => {
     const fetchRank = async () => {
-      if (!user) return;
+      if (!profileUser) return;
       try {
-        // Fetch leaderboard from the new endpoint (with rank from DB)
         const leaderboardData = await get(`${BACKEND_URL}/api/leaderboard?limit=100`);
         if (leaderboardData && leaderboardData.leaderboard) {
-          const found = leaderboardData.leaderboard.find(u => u.username === user.username);
+          const found = leaderboardData.leaderboard.find(u => u.username === profileUser.username);
           setUserRank(found && found.rank != null ? found.rank : 'N/A');
         } else {
           setUserRank('N/A');
@@ -60,7 +78,9 @@ const UserProfile = () => {
       }
     };
     fetchRank();
-  }, [get, user]);
+  }, [get, profileUser]);
+
+  const isOwnProfile = !userId || (profileUser && loggedInUser && profileUser._id === loggedInUser._id);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -107,18 +127,8 @@ const UserProfile = () => {
     }
   };
 
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-2xl shadow-lg mb-6">
-            <div className="animate-spin rounded-full h-8 w-8 border-2 border-white border-t-transparent"></div>
-          </div>
-          <h3 className="text-lg font-bold text-gray-800 mb-2 font-mono">Loading Profile</h3>
-          <p className="text-green-600">Please wait while we fetch your information...</p>
-        </div>
-      </div>
-    );
+  if (!profileUser) {
+    return <ProfileLoading />;
   }
 
   return (
@@ -143,7 +153,7 @@ const UserProfile = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center justify-center w-32 h-32 mb-8 relative">
             {(() => {
-              const avatarUrl = user.profile?.avatar || user.avatar;
+              const avatarUrl = profileUser.profile?.avatar || profileUser.avatar;
               return avatarUrl ? (
                 <img 
                   src={avatarUrl} 
@@ -152,7 +162,7 @@ const UserProfile = () => {
                 />
               ) : (
                 <div className="h-32 w-32 rounded-full bg-gradient-to-br from-green-500 to-blue-600 flex items-center justify-center text-4xl text-white font-bold border-4 border-green-500 shadow-2xl ring-4 ring-green-500/30">
-                  {user.username?.charAt(0).toUpperCase()}
+                  {profileUser.username?.charAt(0).toUpperCase()}
                 </div>
               );
             })()}
@@ -164,7 +174,7 @@ const UserProfile = () => {
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold mb-4 font-mono tracking-wider text-green-600">
-            {user.username}
+            {profileUser.username}
           </h1>
           
           <div className="flex items-center justify-center space-x-6 mb-8">
@@ -178,7 +188,7 @@ const UserProfile = () => {
             <div className="flex items-center space-x-2">
               <span className="text-2xl">⭐</span>
               <span className="text-xl font-bold text-gray-800 font-mono">
-                Level {user.level ?? userProgress.level ?? '1'}
+                Level {profileUser.level ?? userProgress.level ?? '1'}
               </span>
             </div>
           </div>
@@ -210,7 +220,7 @@ const UserProfile = () => {
                   <span className="text-2xl">🎯</span>
                 </div>
                 <span className="text-3xl font-bold text-blue-600 font-mono">
-                  {user.level ?? userProgress.level ?? '1'}
+                  {profileUser.level ?? userProgress.level ?? '1'}
                 </span>
               </div>
               <h3 className="text-lg font-bold text-gray-800 mb-1 font-mono">Level</h3>
@@ -269,11 +279,11 @@ const UserProfile = () => {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-bold text-green-600 mb-2 font-mono">Username</label>
-                  <p className="text-gray-800 font-mono text-lg">{user.username}</p>
+                  <p className="text-gray-800 font-mono text-lg">{profileUser.username}</p>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-green-600 mb-2 font-mono">Email</label>
-                  <p className="text-gray-800 font-mono text-lg">{user.email}</p>
+                  <p className="text-gray-800 font-mono text-lg">{profileUser.email}</p>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-green-600 mb-2 font-mono">Member Since</label>
@@ -287,7 +297,7 @@ const UserProfile = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600 font-mono">Current Level</span>
-                  <span className="text-gray-800 font-bold font-mono text-lg">{user.level ?? userProgress.level ?? '1'}</span>
+                  <span className="text-gray-800 font-bold font-mono text-lg">{profileUser.level ?? userProgress.level ?? '1'}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600 font-mono">Global Rank</span>
@@ -318,7 +328,7 @@ const UserProfile = () => {
           </div>
           
           <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-            {isEditing ? (
+            {isOwnProfile ? (
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
@@ -360,7 +370,7 @@ const UserProfile = () => {
                   <div className="flex items-center space-x-6">
                     <div className="flex-shrink-0">
                       {(() => {
-                        const avatarUrl = user.profile?.avatar || user.avatar;
+                        const avatarUrl = profileUser.profile?.avatar || profileUser.avatar;
                         return avatarUrl ? (
                           <img 
                             src={avatarUrl} 
@@ -369,7 +379,7 @@ const UserProfile = () => {
                           />
                         ) : (
                           <div className="h-20 w-20 rounded-full bg-gradient-to-br from-green-500 to-blue-600 flex items-center justify-center text-2xl text-white font-bold border-4 border-green-500 shadow-lg">
-                            {user.username?.charAt(0).toUpperCase()}
+                            {profileUser.username?.charAt(0).toUpperCase()}
                           </div>
                         );
                       })()}
@@ -430,17 +440,8 @@ const UserProfile = () => {
               </form>
             ) : (
               <div className="text-center py-8">
-                <span className="text-4xl mb-4 block">⚙️</span>
-                <p className="text-gray-600 mb-6 font-mono">Manage your account settings and preferences.</p>
-                <button
-                  onClick={() => setIsEditing(true)}
-                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-xl hover:from-green-600 hover:to-blue-700 transition-all duration-200 font-bold font-mono shadow-lg"
-                >
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                  </svg>
-                  Edit Profile
-                </button>
+                <span className="text-4xl mb-4 block">👤</span>
+                <p className="text-gray-600 mb-6 font-mono">This is a public profile. You can view your friend's DSA stats and achievements here.</p>
               </div>
             )}
           </div>

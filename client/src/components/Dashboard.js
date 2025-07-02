@@ -397,7 +397,7 @@ const Dashboard = () => {
           Track your progress, climb the leaderboard, and join a vibrant DSA community—all in a fun, retro style!
         </p>
         <a
-          href="/games"
+          href="http://localhost:3000/games"
           className="group relative inline-flex items-center justify-center px-12 py-4 text-xl font-bold text-white bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 hover:-translate-y-1 transition-all duration-500 font-mono tracking-widest overflow-hidden border-2 border-white/20"
           style={{
             background: 'linear-gradient(45deg, #16a34a 0%, #22c55e 25%, #3b82f6 50%, #1d4ed8 75%, #1e40af 100%)',
