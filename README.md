@@ -1,103 +1,75 @@
 # ClimbAlgoMountain (DSA Game)
 
-A gamified platform to master Data Structures and Algorithms (DSA) through interactive games, visualizations, and community support. Track your progress, join forums, and unlock rewards—perfect for students, children, and anyone making DSA learning fun and accessible!
+## 1. Project Overview
+
+ClimbAlgoMountain is a gamified platform designed to make learning Data Structures and Algorithms (DSA) fun, interactive, and accessible for everyone. Through a series of engaging games, visualizations, and a supportive community, users can master DSA concepts, track their progress, participate in Q&A, and unlock rewards( Only for a Testing). The platform is ideal for students, children, and anyone looking to strengthen their DSA skills in an enjoyable way.
 
 ---
 
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Game Modules](#game-modules)
-- [Level Progression System](#level-progression-system)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Authentication & Premium](#authentication--premium)
-- [Community & Social Features](#community--social-features)
-- [Rewards & Achievements](#rewards--achievements)
-- [Contribution Guidelines](#contribution-guidelines)
-- [License](#license)
-- [Contact](#contact)
+## 1b. Table of Contents
+
+- [1. Project Overview](#1-project-overview)
+- [2. Features](#2-features)
+- [3. Game Modules](#3-game-modules)
+- [4. Website Screenshots](#4-website-screenshots)
+- [5. Backend](#5-backend)
+- [6. Frontend](#6-frontend)
+- [7. Project Structure](#7-project-structure)
+- [8. Getting Started](#8-getting-started)
 
 ---
 
-## Overview
-ClimbAlgoMountain transforms DSA learning into an adventure. Play interactive games for each DSA topic, visualize algorithms, track your journey, and connect with a supportive community. Designed for all ages, especially students and beginners.
+## 2. Features
+
+- 🎮 **Interactive DSA Games:** Play topic-based games for Arrays, Linked Lists, Stacks, Queues, Sorting, Heaps, Bit Manipulation, Sliding Window, Recursion, Strings, Trees, Graphs, and more.
+- 🏆 **Level Progression & Gamification:** Multiple levels per game, progress and score tracking, achievements, and badges.
+- 📈 **Progress Tracking & Analytics:** Personal dashboard, detailed analytics, and global leaderboard.
+- 👥 **Community & Social Features:** Q&A, friends system, and integrated chatbot for instant help.
+- 💎 **Rewards & Premium:** Earn and redeem points, unlock premium content and advanced games via secure payment.
+- 🔒 **Authentication & Security:** User accounts, secure login, password recovery, and access control for premium content.
+- 🧩 **Visualizations & Learning Tools:** Algorithm visualizers, step-by-step guidance, and hints.
+- 🧒 **Child-Friendly & Accessible:** Engaging, colorful UI and accessible language for all ages.
+- 🛠️ **Developer Friendly:** Modular codebase, API-driven architecture, and extensive documentation for easy contribution.
 
 ---
 
-## Features
-
-### 🎮 Interactive DSA Games
-- **Arrays:** Solve puzzles, collect gems, and master array operations.
-- **Linked Lists:** Build, traverse, and manipulate chains in creative scenarios.
-- **Stacks & Queues:** Play with stacking, queuing, bracket matching, postfix evaluation, and more.
-- **Sorting Algorithms:** Sort toys, books, and more using Bubble, Selection, Insertion, Merge, Quick, Heap, Counting, and Radix sorts.
-- **Heap & Priority Queue:** Build heaps, repair trees, manage hospital queues, and compare heap types.
-- **Bit Manipulation:** Toggle bits, perform AND/OR/XOR/NOT, solve bit puzzles, and pattern matching.
-- **Sliding Window & Two Pointer:** Solve classic sliding window and two-pointer problems interactively.
-- **Recursion:** Explore recursion with nesting dolls, factorials, Fibonacci, Tower of Hanoi, permutations, mazes, fractals, palindromes, and N-Queens.
-- **Strings:** Word Wizard Quest – Practice string manipulation, pattern matching, and word puzzles.
-- **Trees (Premium):** Visualize and build binary trees, perform traversals, and solve tree-based puzzles.
-- **Graphs (Premium):** Learn graph concepts, traversals (BFS/DFS), shortest paths, cycles, and more with visual tools.
-- **Dynamic Programming:** (Coming Soon) Solve optimization puzzles and master DP techniques.
-
-### 🏆 Level Progression & Gamification
-- **Multiple Levels per Game:** Each game is divided into several levels, allowing for gradual mastery of each topic.
-- **Manual Level Access:** All levels are accessible; there is currently no automatic unlocking system.
-- **Progress Tracking:** Your progress is tracked for each level and game.
-- **Score Tracking:** Earn points for each level and game completed.
-- **Achievements & Badges:** Collect badges for milestones, streaks, and high scores.
-
-### 📈 Progress Tracking & Analytics
-- **Personal Dashboard:** View your overall progress, scores, and completed topics.
-- **Detailed Analytics:** Track your learning journey, level completion, and time spent.
-- **Leaderboard:** See top performers and your global rank.
-
-### 👥 Community & Social Features
-- **Forum:** Ask questions, answer others, and discuss DSA topics.
-- **Friends System:** Add friends, view their progress, and compete.
-- **Chatbot:** Get instant help, hints, and DSA explanations.
-
-### 💎 Rewards & Premium
-- **Rewards System:** Earn points and redeem them for real or virtual rewards (badges, kits, etc.).
-- **Premium Games:** Unlock advanced games (Tree, Graph, Bundle) via secure payment (Razorpay).
-- **Premium-Only Content:** Access exclusive levels, visualizations, and advanced challenges.
-
-### 🔒 Authentication & Security
-- **User Accounts:** Register, login, and manage your profile.
-- **Password Recovery:** Secure OTP-based password reset.
-- **Access Control:** Premium content is protected and only available to users with access.
-
-### 🧩 Visualizations & Learning Tools
-- **Algorithm Visualizers:** (Planned/Partial) Visualize sorting, trees, graphs, and more.
-- **Step-by-Step Guidance:** Hints, tooltips, and explanations for each level and concept.
-
-### 🧒 Child-Friendly & Accessible
-- **Kid-Friendly Design:** Colorful, engaging, and easy-to-use interface.
-- **Accessible Language:** Explanations and instructions suitable for all ages.
-
-### 🛠️ Developer & Contributor Features
-- **Modular Codebase:** Easy to add new games, levels, and features.
-- **API-Driven:** Clean separation of frontend and backend for scalability.
-- **Extensive Documentation:** Level progression, project structure, and contribution guidelines.
-
----
-
-## Game Modules
-Each DSA topic is a unique, interactive game with multiple levels:
+## 3. Game Modules
+Each DSA topic is presented as a unique, interactive game with 10 levels and engaging challenges:
 
 - **Arrays:** Treasure Chest Adventure – Collect gems, solve puzzles, and master array operations.
 - **Linked Lists:** Chain Masters Adventure – Build, traverse, and manipulate chains in creative scenarios.
 - **Stacks & Queues:** Stack & Queue Master – Solve stacking and queuing challenges, bracket matching, postfix evaluation, and more.
-- **Sorting Algorithms:** Sorting Master – Sort toys, books, and more using Bubble, Selection, Insertion, Merge, Quick, Heap, Counting, and Radix sorts.
-- **Heap & Priority Queue:** Heap Priority Queue Master – Build heaps, repair trees, manage hospital queues, and compare heap types.
-- **Bit Manipulation:** Bit Manipulation Master – Toggle bits, perform AND/OR/XOR/NOT, solve bit puzzles.
+- **Sorting Algorithms:** Sorting Master – Sort items using Bubble, Selection, Insertion, Merge, Quick, Heap, Counting, and Radix sorts.
+- **Heap & Priority Queue:** Heap Priority Queue Master – Build heaps, repair trees, manage queues, and compare heap types.
+- **Bit Manipulation:** Bit Manipulation Master – Toggle bits, perform AND/OR/XOR/NOT, and solve bit puzzles.
 - **Sliding Window & Two Pointer:** Window Pointer Master – Solve classic sliding window and two-pointer problems interactively.
-- **Recursion:** Recursion Realm – Explore recursion with nesting dolls, factorials, Fibonacci, Tower of Hanoi, permutations, mazes, fractals, palindromes, and N-Queens.
+- **Recursion:** Recursion Realm – Explore recursion with factorials, Fibonacci, Tower of Hanoi, permutations, mazes, fractals, palindromes, and N-Queens.
+- **Strings:** Word Wizard Quest – Practice string manipulation, pattern matching, and word puzzles.
 - **Trees (Premium):** Tree Game – Visualize and build binary trees, perform traversals, and solve tree-based puzzles.
 - **Graphs (Premium):** Graph Game – Learn graph concepts, traversals (BFS/DFS), shortest paths, cycles, and more with visual tools.
-- **Dynamic Programming:** Dynamic Programming Game – (Coming Soon) Solve optimization puzzles and master DP techniques.
+- **Dynamic Programming (Comming soon):** Dynamic Programming Game – (Coming Soon) Solve optimization puzzles and master DP techniques.
+
+---
+
+## 4. Website Screenshots
+
+📸 **Visual Tour of ClimbAlgoMountain**
+
+Explore the complete user interface and experience of our DSA learning platform through our comprehensive screenshot collection:
+
+**[View All Website Screenshots & Images](https://drive.google.com/drive/folders/19OF71Bek1uMhk86j7YZz5g4HccErLwij?usp=sharing)**
+
+The screenshot collection includes:
+- 🏠 **Home Page** - Landing page with hero section and feature overview
+- 🎮 **Game Home Page** - Central hub for all DSA games
+- 🔐 **Authentication Pages** - Login, signup, and password recovery flows
+- 🎯 **Individual Game Pages** - Screenshots of all 12+ DSA games
+- 👥 **Community Features** - Forum, friends, and leaderboard interfaces
+- 🏆 **Rewards & Premium** - Achievement system and premium purchase flow
+- 📱 **Responsive Design** - Mobile and desktop interface variations
+- 🎨 **UI/UX Elements** - Navigation, modals, and interactive components
+
+*Perfect for developers, users, and stakeholders to understand the complete user experience before diving into the codebase.*
 
 ---
 
@@ -108,7 +80,7 @@ Each DSA topic is a unique, interactive game with multiple levels:
 
 ---
 
-## Tech Stack
+## 5. Tech Stack
 
 **Frontend:**
 - **React 18** (core UI library)
@@ -145,7 +117,7 @@ Each DSA topic is a unique, interactive game with multiple levels:
 
 ---
 
-## Project Structure
+## 7. Project Structure
 ```
 .
 ├── client/                          # Frontend (React)
@@ -261,7 +233,7 @@ Each DSA topic is a unique, interactive game with multiple levels:
 
 ---
 
-## Getting Started
+## 8. Getting Started
 1. **Clone the repository:**
    ```bash
    git clone (https://github.com/Vasuaghera/ClimbAlgoMountain)
@@ -326,3 +298,12 @@ Each DSA topic is a unique, interactive game with multiple levels:
 **Mission:** Making DSA learning fun, accessible, and effective for everyone.  
 
 For questions, suggestions, or support, open an issue or contact via the project repository. 
+
+server.js (entry point)
+config/ (database, cloud, payment config)
+models/ (data structure)
+middleware/ (request processing helpers)
+controllers/ (business logic)
+routes/ (API endpoints)
+utils/ (helper functions)
+scripts/ (data seeding, etc.)
