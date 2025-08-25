@@ -29,11 +29,9 @@ The screenshot collection includes:
 - [1. Project Overview](#1-project-overview)
 - [2. Features](#2-features)
 - [3. Game Modules](#3-game-modules)
-- [4. Website Screenshots](#4-website-screenshots)
-- [5. Backend](#5-backend)
-- [6. Frontend](#6-frontend)
-- [7. Project Structure](#7-project-structure)
-- [8. Getting Started](#8-getting-started)
+- [4. Tech Stack](#4-tech-stack)
+- [5. Project Structure](#7-project-structure)
+- [6. Getting Started](#8-getting-started)
 
 ---
 
@@ -69,19 +67,7 @@ Each DSA topic is presented as a unique, interactive game with 10 levels and eng
 
 ---
 
-## 4. Website Screenshots
-
-
----
-
-## Level Progression System
-- **Sidebar Menu:** Shows all levels and it show completed and incompleted levels.
-- **Animated Progress:** Smooth transitions, pulsing effects, and progress bars.
-- **Progress Saved:** All progress is saved to your profile and can be resumed anytime.
-
----
-
-## 5. Tech Stack
+## 4. Tech Stack
 
 **Frontend:**
 - **React 18** (core UI library)
@@ -118,7 +104,7 @@ Each DSA topic is presented as a unique, interactive game with 10 levels and eng
 
 ---
 
-## 7. Project Structure
+## 5. Project Structure
 ```
 .
 ├── client/                          # Frontend (React)
@@ -234,7 +220,7 @@ Each DSA topic is presented as a unique, interactive game with 10 levels and eng
 
 ---
 
-## 8. Getting Started
+## 6. Getting Started
 1. **Clone the repository:**
    ```bash
    git clone (https://github.com/Vasuaghera/ClimbAlgoMountain)
