@@ -4,6 +4,24 @@
 
 ClimbAlgoMountain is a gamified platform designed to make learning Data Structures and Algorithms (DSA) fun, interactive, and accessible for everyone. Through a series of engaging games, visualizations, and a supportive community, users can master DSA concepts, track their progress, participate in Q&A, and unlock rewards( Only for a Testing). The platform is ideal for students, children, and anyone looking to strengthen their DSA skills in an enjoyable way.
 
+📸 **Visual Tour of ClimbAlgoMountain**
+
+Explore the complete user interface and experience of our DSA learning platform through our comprehensive screenshot collection:
+
+**[View All Website Screenshots & Images](https://drive.google.com/drive/folders/19OF71Bek1uMhk86j7YZz5g4HccErLwij?usp=sharing)**
+
+The screenshot collection includes:
+- 🏠 **Home Page** - Landing page with hero section and feature overview
+- 🎮 **Game Home Page** - Central hub for all DSA games
+- 🔐 **Authentication Pages** - Login, signup, and password recovery flows
+- 🎯 **Individual Game Pages** - Screenshots of all 12+ DSA games
+- 👥 **Community Features** - Forum, friends, and leaderboard interfaces
+- 🏆 **Rewards & Premium** - Achievement system and premium purchase flow
+- 📱 **Responsive Design** - Mobile and desktop interface variations
+- 🎨 **UI/UX Elements** - Navigation, modals, and interactive components
+
+*Perfect for developers, users, and stakeholders to understand the complete user experience before diving into the codebase.*
+
 ---
 
 ## 1b. Table of Contents
@@ -53,23 +71,6 @@ Each DSA topic is presented as a unique, interactive game with 10 levels and eng
 
 ## 4. Website Screenshots
 
-📸 **Visual Tour of ClimbAlgoMountain**
-
-Explore the complete user interface and experience of our DSA learning platform through our comprehensive screenshot collection:
-
-**[View All Website Screenshots & Images](https://drive.google.com/drive/folders/19OF71Bek1uMhk86j7YZz5g4HccErLwij?usp=sharing)**
-
-The screenshot collection includes:
-- 🏠 **Home Page** - Landing page with hero section and feature overview
-- 🎮 **Game Home Page** - Central hub for all DSA games
-- 🔐 **Authentication Pages** - Login, signup, and password recovery flows
-- 🎯 **Individual Game Pages** - Screenshots of all 12+ DSA games
-- 👥 **Community Features** - Forum, friends, and leaderboard interfaces
-- 🏆 **Rewards & Premium** - Achievement system and premium purchase flow
-- 📱 **Responsive Design** - Mobile and desktop interface variations
-- 🎨 **UI/UX Elements** - Navigation, modals, and interactive components
-
-*Perfect for developers, users, and stakeholders to understand the complete user experience before diving into the codebase.*
 
 ---
 
